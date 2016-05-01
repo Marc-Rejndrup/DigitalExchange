@@ -21,7 +21,7 @@ INSERT INTO Stock VALUES ('IBM', 'IBM', 'computer', 91.41, 500);
 INSERT INTO Stock VALUES ('F', 'Ford', 'automotive', 9.00, 750);
 
 INSERT INTO Orders VALUES (75, 34.23, 1, '', 0, 'market', 'buy', 444444444, 'GM');
-INSERT INTO Orders VALUES (10, 90.00, 1, '', 0, '$90', 'sell', 222222222, 'IBM');
+INSERT INTO Orders VALUES (10, 90.00, 2, '', 0, '$90', 'sell', 222222222, 'IBM');
 
 INSERT INTO Holding VALUES ('GM', 250, 444444444);
 INSERT INTO Holding VALUES ('Ford', 100, 444444444);
