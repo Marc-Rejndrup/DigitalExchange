@@ -1,17 +1,19 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import dataType.DataTypeHolding;
 public class clientHoldingServlet extends HttpServlet{
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 	 	//always
-		String loginID = ""+session.getValue("login");
-		String accountID = ""+session.getValue("account");
+		String loginID = ""+session.getAttribute("login");
+		String accountID = ""+session.getAttribute("account");
 		String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
 		String mysUserID = "root"; 
@@ -34,8 +36,8 @@ public class clientHoldingServlet extends HttpServlet{
 			while(rs.next()){
 				DataTypeHolding data = new DataTypeHolding();
 				data.setStockSymbol(rs.getString(1));
-				data.setSetAmount(rs.getString(2));
-				data.setSetAccountId(rs.getString(3));
+				data.setAmount(rs.getString(2));
+				data.setAccountId(rs.getString(3));
 				list.add(data);
 			}
 			request.setAttribute("HoldingTable", list);
