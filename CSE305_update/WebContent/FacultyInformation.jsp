@@ -42,7 +42,7 @@ response.setDateHeader("Expires",0);
                           <span style="font-size: 10pt">Number Stocks</span></td>
                         
                          <td style="width: 7px">
-                            <span style="font-size: 10pt">Set Num</span></td>
+                            <span style="font-size: 10pt">Set Price</span></td>
                     </tr>   
 <%
 		String crscode=request.getParameter("crscode");
@@ -110,6 +110,7 @@ response.setDateHeader("Expires",0);
                     <form action="changeemployee" method="post">
                     	SSN: <input type=text name="empssn" /><br/>
                     	Name: <input type=text name="empname" /><br/>
+                    	Address: <input type=text name="empaddress" /><br/>
                     	Zipcode: <input type=text name="empzipcode" /><br/>
                     	Telephone: <input type=text name="emptelephone" /><br/>
                     	HourlyRate: <input type=text name="emphourlyrate" /><br/>
@@ -132,10 +133,24 @@ response.setDateHeader("Expires",0);
                     	PricePerShare: <input type=text name="nopps" /><br/>
                     	Price Type: <input type=text name="nopricetype" /><br/>
                     	Percentage: <input type=text name="nopercentage" /><br/>
-                    	Order Type: <input id="Radio1" name="group1" checked="checked" type="radio" /><strong><span style="font-size: 10pt;
-        font-family: Arial">Buy  &nbsp; &nbsp;<input id="Radio2" name="group1" type="radio" />Sell
+                    	Order Type: <input id="Radio1" name="group1" checked="checked" type="radio" />Buy  &nbsp; &nbsp;<input id="Radio2" name="group1" type="radio" />Sell<br/>
                     	<input id="Button4" type="submit" />
+                    </form><br/>
+                    
+                    Edit Customer - given an SSN/id, change the following
+                    <form action="changeclient" method="post">
+                    	SSN: <input type=text name="clientssn" /><br/>
+                    	Name: <input type=text name="clientname" /><br/>
+                    	Address: <input type=text name="clientaddress" /><br/>
+                    	Zipcode: <input type=text name="clientzipcode" /><br/>
+                    	Telephone: <input type=text name="clienttelephone" /><br/>
+                    	Email: <input type=text name="clientemail" /><br/>
+                    	Credit Card Number: <input type=text name="clientcreditcard" /><br/>
+                    	Rating: <input type=text name="clientrating" /><br/>
+                    	<input id="Button2" type="submit" />
                     </form>
+                    
+                    <form action="generateemail" method="get"><input id="Button5" type="submit" value="Generate Mailing List"></form>
                     
                     <br />
                     <br />

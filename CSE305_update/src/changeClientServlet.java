@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class changeEmployeeServlet extends HttpServlet{
+public class changeClientServlet extends HttpServlet{
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
 		 
@@ -17,12 +17,15 @@ public class changeEmployeeServlet extends HttpServlet{
 		          String stuId = ""+session.getValue("login");
 		          
 
-		  		String ssn = request.getParameter("empssn");
-				String name = request.getParameter("empname");
-				String address = request.getParameter("empaddress");
-				String zipcode = request.getParameter("empzipcode");
-				String telephone = request.getParameter("emptelephone");
-				String hourlyrate = request.getParameter("emphourlyrate");
+		          
+		  		String ssn = request.getParameter("clientssn");
+				String name = request.getParameter("clientname");
+				String address = request.getParameter("clientaddress");
+				String zipcode = request.getParameter("clientzipcode");
+				String telephone = request.getParameter("clienttelephone");
+				String email = request.getParameter("clientemail");
+				String creditcard = request.getParameter("clientcreditcard");
+				String rating = request.getParameter("clientrating");
 				
 		     	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 		     	String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
@@ -44,7 +47,6 @@ public class changeEmployeeServlet extends HttpServlet{
 		            			System.out.println("Connected successfully to database using JConnect");
 		            
 		            			java.sql.Statement stmt1=conn.createStatement();
-									//stmt1.executeUpdate("update Stock set PricePerShare='"+amt+"' where StockSymbol='"+symbol+"'");
 		            			if(!name.equals(""))
 		            				stmt1.executeUpdate("update Person set Name='"+name+"' where ssn='"+ssn+"'");
 		            			if(!address.equals(""))
@@ -53,8 +55,12 @@ public class changeEmployeeServlet extends HttpServlet{
 		            				stmt1.executeUpdate("update Person set Zipcode='"+zipcode+"' where ssn='"+ssn+"'");
 		            			if(!telephone.equals(""))
 		            				stmt1.executeUpdate("update Person set Telephone='"+telephone+"' where ssn='"+ssn+"'");
-		            			if(!hourlyrate.equals(""))
-		            				stmt1.executeUpdate("update Employee set HourlyRate='"+hourlyrate+"' where ssn='"+ssn+"'");
+		            			if(!email.equals(""))
+		            				stmt1.executeUpdate("update Client set Email='"+email+"' where Id='"+ssn+"'");
+		            			if(!creditcard.equals(""))
+		            				stmt1.executeUpdate("update Client set CreditCardNumber='"+creditcard+"' where Id='"+ssn+"'");
+		            			if(!rating.equals(""))
+		            				stmt1.executeUpdate("update Client set Rating='"+rating+"' where Id='"+ssn+"'");
 		            			
 					} catch(Exception e)
 					{

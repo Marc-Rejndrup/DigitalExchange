@@ -35,8 +35,8 @@ Set the share price of a stock (for simulating market fluctuations in a stock's 
 Customer Representatives should be thought of as stock brokers and should be able to:
 
 -Record an order -----DONE-----
--Add, Edit and Delete information for a customer
--Produce customer mailing lists
+-Add, Edit and Delete information for a customer -----DONE-----
+-Produce customer mailing lists -----DONE-----
 -Produce a list of stock suggestions for a given customer (based on that customer's past orders)
 
 3.3 Customer-Level Transactions
