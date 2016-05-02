@@ -1,0 +1,17 @@
+manager tables
+employee (e)
+revenue (for stock, stocktype, cust)
+stock(+, edit price)
+order
+customer (with delete)
+
+employee tables
+order (add)
+customer (edit, maillist_checklist)
+employee (-hourly rate)
+
+Client
+Stock ()
+Holding
+Orders (+)
+History (stocks)
