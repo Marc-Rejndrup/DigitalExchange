@@ -1,4 +1,4 @@
-
+package dataType;
 
 
 public class DataTypeA implements java.io.Serializable {

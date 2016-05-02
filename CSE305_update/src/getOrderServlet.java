@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataType.DataTypeOrder;
+
 public class getOrderServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request,

@@ -1,3 +1,4 @@
+package dataType;
 
 public class DataTypeOrder implements java.io.Serializable{
 	private String NumShares;
