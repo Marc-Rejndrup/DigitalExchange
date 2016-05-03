@@ -1,4 +1,4 @@
-package servelets;
+package servlets;
 import java.io.*;
 import java.sql.Date;
 import java.util.ArrayList;

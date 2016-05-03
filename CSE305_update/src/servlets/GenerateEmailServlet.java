@@ -1,4 +1,4 @@
-package servelets;
+package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dataType.DataTypeOrder;
-
-public class getOrderServlet extends HttpServlet{
+public class GenerateEmailServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		
-		
-		String getsym = request.getParameter("getsym");
-		String custnum = request.getParameter("custnum");
 		
 		String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
    	  	String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
@@ -42,29 +36,16 @@ public class getOrderServlet extends HttpServlet{
             			
             			java.sql.ResultSet rs;
             			
-            			if(!getsym.equals(""))
-            				rs = stmt1.executeQuery("select * from Orders where Orders.Stock='"+getsym+"'");
-            			else
-            				rs = stmt1.executeQuery("select * from Orders where Orders.AccountId='"+custnum+"'");
+            			rs = stmt1.executeQuery("select Email from Client");
 
-            			List<DataTypeOrder> list = new ArrayList<DataTypeOrder>();
+
+            			List<String> list = new ArrayList<String>();
             			
             			while(rs.next()){
-            				DataTypeOrder data = new DataTypeOrder();
-            				data.setNumShares(rs.getString(1));
-            				data.setPricePerShare(rs.getString(2));
-            				data.setId(rs.getString(3));
-            				data.setDateTime(rs.getString(4));
-            				data.setPercentage(rs.getString(5));
-            				data.setPrice(rs.getString(6));
-            				data.setOrderType(rs.getString(7));
-            				data.setAccountId(rs.getString(8));
-            				data.setStock(rs.getString(9));
-
-            				list.add(data);
+            				list.add(rs.getString(1));
             			}
             			
-            			request.setAttribute("orderinfo", list);
+            			request.setAttribute("emaillist", list);
             			rs.close();
             			conn.close();
             			
@@ -81,7 +62,7 @@ public class getOrderServlet extends HttpServlet{
 		
 		
 		
-		RequestDispatcher view = request.getRequestDispatcher("orderlist.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("maillist.jsp");
 		view.forward(request, response);
 	}
 }

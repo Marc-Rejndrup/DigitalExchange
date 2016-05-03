@@ -1,4 +1,4 @@
-package servelets;
+package servlets;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -7,32 +7,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class changeClientServlet extends HttpServlet{
+public class changeStockServlet extends HttpServlet{
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
-		 
 		  HttpSession session=request.getSession();  
 		  
 		  
 		          String stuId = ""+session.getValue("login");
 		          
 
-		          
-		  		String ssn = request.getParameter("clientssn");
-				String name = request.getParameter("clientname");
-				String address = request.getParameter("clientaddress");
-				String zipcode = request.getParameter("clientzipcode");
-				String telephone = request.getParameter("clienttelephone");
-				String email = request.getParameter("clientemail");
-				String creditcard = request.getParameter("clientcreditcard");
-				String rating = request.getParameter("clientrating");
-				
+		  		String amt = request.getParameter("amount");
+				String symbol = request.getParameter("stocksym");
 		     	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 		     	String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
 		      	String mysUserID = "root"; 
 		      	String mysPassword = "1234";
 
 
+		      	System.out.println(amt);
+		      	System.out.println(symbol);
 		      	
 					java.sql.Connection conn=null;
 					try 
@@ -47,21 +40,7 @@ public class changeClientServlet extends HttpServlet{
 		            			System.out.println("Connected successfully to database using JConnect");
 		            
 		            			java.sql.Statement stmt1=conn.createStatement();
-		            			if(!name.equals(""))
-		            				stmt1.executeUpdate("update Person set Name='"+name+"' where ssn='"+ssn+"'");
-		            			if(!address.equals(""))
-		            				stmt1.executeUpdate("update Person set Zipcode='"+address+"' where ssn='"+ssn+"'");
-		            			if(!zipcode.equals(""))
-		            				stmt1.executeUpdate("update Person set Zipcode='"+zipcode+"' where ssn='"+ssn+"'");
-		            			if(!telephone.equals(""))
-		            				stmt1.executeUpdate("update Person set Telephone='"+telephone+"' where ssn='"+ssn+"'");
-		            			if(!email.equals(""))
-		            				stmt1.executeUpdate("update Client set Email='"+email+"' where Id='"+ssn+"'");
-		            			if(!creditcard.equals(""))
-		            				stmt1.executeUpdate("update Client set CreditCardNumber='"+creditcard+"' where Id='"+ssn+"'");
-		            			if(!rating.equals(""))
-		            				stmt1.executeUpdate("update Client set Rating='"+rating+"' where Id='"+ssn+"'");
-		            			
+									stmt1.executeUpdate("update Stock set PricePerShare='"+amt+"' where StockSymbol='"+symbol+"'");
 					} catch(Exception e)
 					{
 						e.printStackTrace();
