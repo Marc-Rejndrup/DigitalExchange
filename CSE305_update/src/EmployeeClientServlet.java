@@ -30,8 +30,7 @@ public class EmployeeClientServlet extends HttpServlet {//might need to handle d
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
+			rs = stmt1.executeQuery("SELECT * FROM CLIENT");
 			//type the list.
 			//List<x> list = new ArrayList<x>();
 			while(rs.next()){
