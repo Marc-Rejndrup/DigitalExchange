@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
+import dataType.DataTypeOrder;
 
-public class EmployeeClientServlet extends HttpServlet {//might need to handle doGet.
+public class EmployeeOrderServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 		String loginID = ""+session.getAttribute("login");
@@ -30,14 +31,23 @@ public class EmployeeClientServlet extends HttpServlet {//might need to handle d
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
+			rs = stmt1.executeQuery("SELECT * FROM ORDER");
 			//type the list.
-			//List<x> list = new ArrayList<x>();
+			List<DataTypeOrder> list = new ArrayList<DataTypeOrder>();
 			while(rs.next()){
-				//build info for the graph, possibly with arrayList? sort by increasing date.
+				DataTypeOrder data = new DataTypeOrder();
+				data.setNumShares(rs.getString(1));
+				data.setPricePerShare(rs.getString(2));
+				data.setId(rs.getString(3));
+				data.setDateTime(rs.getString(4));
+				data.setPercentage(rs.getString(5));
+				data.setPrice(rs.getString(6));
+				data.setOrderType(rs.getString(7));
+				data.setAccountId(rs.getString(8));
+				data.setStock(rs.getString(9));
+				list.add(data);
 			}
-			//request.setAttribute("TableNAME", list);
+			request.setAttribute("EmployeeOrderTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
