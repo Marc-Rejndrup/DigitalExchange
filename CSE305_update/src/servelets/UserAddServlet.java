@@ -1,10 +1,11 @@
+package servelets;
 import java.io.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
+import other.User;
 
 public class UserAddServlet extends HttpServlet {
 
