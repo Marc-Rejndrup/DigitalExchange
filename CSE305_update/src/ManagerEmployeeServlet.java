@@ -36,7 +36,6 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 			rs = stmt1.executeQuery("SELECT * FROM Employee AS e, Person AS p WHERE e.ssn = p.ssn");
 			List<DataTypeEmployee> list = new ArrayList<DataTypeEmployee>();
 			while(rs.next()){
-				System.out.println(rs.getString(6));
 				DataTypeEmployee data = new DataTypeEmployee();
 				data.setHourlyRate(rs.getString(1));
 				data.setStartDate(rs.getString(2));
@@ -48,7 +47,7 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 				data.setTelephone(rs.getString(9));
 				list.add(data);
 			}
-			request.setAttribute("ManagerEmployeeTable", list);
+			request.getSession().setAttribute("ManagerEmployeeTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){

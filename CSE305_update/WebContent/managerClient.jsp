@@ -17,20 +17,35 @@
 				<th>ZipCode</th>
 				<th>Telephone</th>
 			</tr>
-			<c:forEach var="item" items="${EmployeeTable}" >
-				<td>${item.id}</td>
+			<c:forEach var="item" items="${sessionScope.ManagerClientTable}" >
+			<tr>
+				<td>${item.custNum}</td>
+				<td>${item.name}</td>
 				<td>${item.ssn}</td>
-				<td>${item.startDate}</td>
 				<td>${item.email}</td>
 				<td>${item.creditCard}</td>
 				<td>${item.rating}</td>
 				<td>${item.address}</td>
 				<td>${item.zipCode}</td>
 				<td>${item.telephone}</td>
+				</tr>
 			</c:forEach>
 		</table>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 	</body>
+		
 	<footer>
 		<%@include file="managerFooter.jsp"%>
 	</footer>
+	<script>
+	$(function(){
+		$.ajax({
+			type: "POST",
+			url: "managerClient",
+			context: document.body
+		});
+	});
+	
+
+	</script>
 </html>

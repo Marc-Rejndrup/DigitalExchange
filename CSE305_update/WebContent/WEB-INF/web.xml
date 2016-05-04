@@ -72,6 +72,14 @@
 		<servlet-name>managerEmployee</servlet-name>
 		<url-pattern>/managerEmployee</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerClient</servlet-name>
+		<servlet-class>ManagerClientServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerClient</servlet-name>
+		<url-pattern>/managerClient</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>other.LoginFilter</filter-class>

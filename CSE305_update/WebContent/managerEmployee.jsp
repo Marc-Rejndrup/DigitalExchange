@@ -7,9 +7,9 @@
 	<body>
 		<table>
 			<tr>
+				<th>ID</th>
 				<th>Name</th>
 				<th>SSN</th>
-				<th>ID</th>
 				<th>Manager</th>
 				<th>Hourly Pay</th>
 				<th>Employed Since</th>
@@ -17,11 +17,11 @@
 				<th>Address</th>
 				<th>Zip Code</th>
 			</tr>
-			<c:forEach var="item" items="${ManagerEmployeeTable}">
+			<c:forEach var="item" items="${sessionScope.ManagerEmployeeTable}">
 				<tr>
+					<td>${item.employeeId}</td>
 					<td>${item.name}</td>
 					<td>${item.ssn}</td>
-					<td>${item.employeeId}</td>
 					<td>${item.manager}</td>
 					<td>${item.hourlyRate}</td>
 					<td>${item.startDate}</td>
@@ -38,10 +38,12 @@
 		<%@include file="managerFooter.jsp"%>
 	</footer>
 	<script>
+	$(function(){
 		$.ajax({
 			type: "POST",
 			url: "managerEmployee",
 			context: document.body
 		});
+	});
 	</script>
 </html>
