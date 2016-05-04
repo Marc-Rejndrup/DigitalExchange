@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import dataType.DataTypeHolding;
+import dataType.DataTypeClient;
 
 public class ManagerEmployeeServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,14 +32,19 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
-			//type the list.
-			//List<x> list = new ArrayList<x>();
+			rs = stmt1.executeQuery("SELECT * FROM Employee AS e, Person AS p WHERE e.name = p.name && e.telephone = p.telephone");
+			List<DataTypeEmployee> list = new ArrayList<DataTypeEmployee>();
 			while(rs.next()){
-				//build table
+				DataTypeEmployee data = new DataTypeEmployee();
+				data.setName(rs.getString(1));
+				data.setTelephone(rs.getString(2));
+				data.setHourlyRate(rs.getString(3));
+				data.setStartDate(rs.getString(4));
+				data.setSsn(rs.getString(5));
+				data.setEmployeeId(rs.getString(6));
+				list.add(data);
 			}
-			//request.setAttribute("TableNAME", list);
+			request.setAttribute("EmployeeClientTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
