@@ -1,15 +1,15 @@
 package dataType;
 
 public class DataTypeHolding implements java.io.Serializable{
-	private String stockSymbol;
+	private String symbol;
 	private String amount;
-	private String accountId;
+	private String accNum;
 	
-	public String getStockSymbol() {
-		return stockSymbol;
+	public String getSymbol() {
+		return symbol;
 	}
-	public void setStockSymbol(String stockSymbol) {
-		this.stockSymbol = stockSymbol;
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 	public String getAmount() {
 		return amount;
@@ -17,10 +17,12 @@ public class DataTypeHolding implements java.io.Serializable{
 	public void setAmount(String amount) {
 		this.amount = amount;
 	}
-	public String getAccountId() {
-		return accountId;
+	public String getAccNum() {
+		return accNum;
 	}
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
+	public void setAccNum(String accNum) {
+		this.accNum = accNum;
 	}
+	
+	
 }

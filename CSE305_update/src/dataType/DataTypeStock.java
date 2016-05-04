@@ -6,6 +6,7 @@ public class DataTypeStock implements java.io.Serializable{
 	private String type;
 	private String price;
 	private String date;
+	
 	public String getSymbol() {
 		return symbol;
 	}

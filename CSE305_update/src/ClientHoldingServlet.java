@@ -36,9 +36,9 @@ public class ClientHoldingServlet extends HttpServlet{
 			List<DataTypeHolding> list = new ArrayList<DataTypeHolding>();
 			while(rs.next()){
 				DataTypeHolding data = new DataTypeHolding();
-				data.setStockSymbol(rs.getString(1));
-				data.setAmount(rs.getString(2));
-				data.setAccountId(rs.getString(3));
+				data.setAccNum(rs.getString(1));
+				data.setSymbol(rs.getString(2));
+				data.setAmount(rs.getString(3));
 				list.add(data);
 			}
 			request.setAttribute("HoldingTable", list);

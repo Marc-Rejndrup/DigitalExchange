@@ -24,7 +24,8 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 		String mysPassword = "1234";
 		//get Parameters
 		String orderId = request.getParameter("OrderId");
-
+		String stockSym = request.getParameter("stockSym");
+		
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
@@ -35,18 +36,23 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//get the relevant order.
-			rs = stmt1.executeQuery("SELECT OrderType, NumShares, Date, Fee, Symbol, Price, Percent, FilledPrice FROM Order WHERE OrderId = "+ orderId);
-			DataTypeOrder o = new DataTypeOrder();
-			o.setOrderType(rs.getString(1));
-			o.setNumShares(rs.getString(2));
-			o.setDateTime(rs.getString(3));
-			o.setFee(rs.getString(4));
-			o.setStock(rs.getString(5));
-			o.setPricePerShare(rs.getString(6));
-			o.setPercentage(rs.getString(7));
-			o.setPrice(rs.getString(8));
-			rs = stmt1.executeQuery("SELECT Date, MarketPrice FROM Stock WHERE symbol = "+ o.getStock());
+			if(orderId != null){
+				//get the relevant order.
+				rs = stmt1.executeQuery("SELECT OrderType, NumShares, Date, Fee, Symbol, Price, Percent, FilledPrice FROM Order WHERE OrderId = "+ orderId);
+				DataTypeOrder o = new DataTypeOrder();
+				o.setOrderType(rs.getString(1));
+				o.setNumShares(rs.getString(2));
+				o.setDateTime(rs.getString(3));
+				o.setFee(rs.getString(4));
+				o.setStock(rs.getString(5));
+				o.setPricePerShare(rs.getString(6));
+				o.setPercentage(rs.getString(7));
+				o.setPrice(rs.getString(8));
+				request.setAttribute("Order", o);
+				rs = stmt1.executeQuery("SELECT Date, MarketPrice FROM Stock WHERE symbol = "+ o.getStock());
+			} else {
+				rs = stmt1.executeQuery("SELECT Date, MarketPrice FROM Stock WHERE symbol = "+ stockSym);
+			}
 			List<DataTypeStock> list = new ArrayList<DataTypeStock>();
 			while(rs.next()){
 				DataTypeStock data = new DataTypeStock();
@@ -55,7 +61,6 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 				list.add(data);
 			}
 			request.setAttribute("ClientHistoryTable", list);
-			request.setAttribute("Order", o);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
