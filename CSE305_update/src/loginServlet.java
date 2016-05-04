@@ -13,159 +13,134 @@ import javax.servlet.http.HttpSession;
  */
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public loginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-//		 HttpSession session2=request.getSession(false);
-//		 System.out.println("session44442:   "+session2);
-//		 
-//		 if(session2!=null )
-//		 {
-//			 
-//			 String stuId = "" + session2.getValue("login");
-//			 System.out.println("stuIdstuId:   "+stuId);
-//			 
-//			 ServletContext context= getServletContext();
-//				RequestDispatcher rd= context.getRequestDispatcher("/studentinfo");
-//				rd.forward(request, response);
-//				return;
-//		 }
-//		
-		
-
-		
+	public loginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		if((request.getParameter("action")!=null)&&	(request.getParameter("action").trim().equals("logout")))
-		{
-			 HttpSession session=request.getSession();  
-			session.putValue("login","");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// HttpSession session2=request.getSession(false);
+		// System.out.println("session44442: "+session2);
+		//
+		// if(session2!=null )
+		// {
+		//
+		// String stuId = "" + session2.getValue("login");
+		// System.out.println("stuIdstuId: "+stuId);
+		//
+		// ServletContext context= getServletContext();
+		// RequestDispatcher rd= context.getRequestDispatcher("/studentinfo");
+		// rd.forward(request, response);
+		// return;
+		// }
+		//
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// logout
+		if ((request.getParameter("action") != null) && (request.getParameter("action").trim().equals("logout"))) {
+			HttpSession session = request.getSession();
+			session.putValue("login", "");
 			response.sendRedirect("/");
 			return;
 		}
-			String username = request.getParameter("username");
-			String userpasswd = request.getParameter("userpasswd");
-	     	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
-	   	  	String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
-	  	String mysUserID = "root"; 
-	  	String mysPassword = "1234";
-	    
-	  	 HttpSession session=request.getSession();  
-		session.putValue("login","");
-		if ((username!=null) &&(userpasswd!=null))
-		{
-			if (username.trim().equals("") || userpasswd.trim().equals(""))
-			{
+
+		String username = request.getParameter("username");
+		String userpasswd = request.getParameter("userpasswd");
+		String mysJDBCDriver = "com.mysql.jdbc.Driver";
+		String mysURL = "jdbc:mysql://127.0.0.1:3306/cse305";
+		String mysUserID = "root";
+		String mysPassword = "1234";
+
+		HttpSession session = request.getSession();
+		session.putValue("login", "");
+		if ((username != null) && (userpasswd != null)) {
+			if (username.trim().equals("") || userpasswd.trim().equals("")) {
 				response.sendRedirect("index.htm");
-			}
-			else
-			{
+			} else {
 				// code start here
-				java.sql.Connection conn=null;
+				java.sql.Connection conn = null;
 				try {
-			            	Class.forName(mysJDBCDriver).newInstance();
-	            			java.util.Properties sysprops=System.getProperties();
-	            			sysprops.put("user",mysUserID);
-	            			sysprops.put("password",mysPassword);
-	        
-					//connect to the database
-	            			conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
-	            			System.out.println("Connected successfully to database using JConnect");
-	            
-	            			conn.setAutoCommit(false);
-	            			java.sql.Statement stmt1=conn.createStatement();
-					java.sql.ResultSet rs = stmt1.executeQuery(" select * from Person, Client where Person.SSN='"+username+"' and Person.Telephone='"+userpasswd+"' and Client.Id=Person.SSN");
-					if (rs.next())
-					{
+					Class.forName(mysJDBCDriver).newInstance();
+					java.util.Properties sysprops = System.getProperties();
+					sysprops.put("user", mysUserID);
+					sysprops.put("password", mysPassword);
+
+					// connect to the database
+					conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
+					System.out.println("Connected successfully to database using JConnect");
+
+					conn.setAutoCommit(false);
+					java.sql.Statement stmt1 = conn.createStatement();
+					java.sql.ResultSet rs = stmt1.executeQuery(" select * from Person, Client where Person.SSN='"
+							+ username + "' and Person.Telephone='" + userpasswd + "' and Client.CustNum=Person.SSN");
+					if (rs.next()) {
 						// login success
-						session.putValue("login",username);
-//						response.sendRedirect("studentinfo");
-						
-//						response.sendRedirect("/StudentInfoServlet");
-						
-						
+						session.putValue("login", username);
+						// response.sendRedirect("studentinfo");
+
+						// response.sendRedirect("/StudentInfoServlet");
+
 						System.out.println("RequestDispatcher rd= context.getRequestDispatcher;");
 						
-						ServletContext context= getServletContext();
-						RequestDispatcher rd= context.getRequestDispatcher("/studentinfo");
-						rd.forward(request, response);
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-					}
-					else
-					{
+						/*
+						ServletContext context = getServletContext();
+						RequestDispatcher rd = context.getRequestDispatcher("clientHolding.jsp");
+						*/
+						//rd.forward(request, response);
+						response.sendRedirect("clientHolding.jsp");
+
+					} else {
 						System.out.println("profff");
 						System.out.println("profff");
 						System.out.println("profff");
-						rs = stmt1.executeQuery(" select * from Person where SSN='"+username+"' and Telephone='"+userpasswd+"'");
-						
-						
-						if(rs.next())
-						{
+						rs = stmt1.executeQuery(" select * from Person where SSN='" + username + "' and Telephone='"
+								+ userpasswd + "'");
+
+						if (rs.next()) {
 							session.putValue("login", username);
-							response.sendRedirect("FacultyInformation.jsp");
+							rs = stmt1.executeQuery(" select * from Employee where SSN='"+username+"'");
+							rs.next();
+							if(rs.getString(5).equals("0"))
+								response.sendRedirect("employeeOrder.jsp");
+							else
+								response.sendRedirect("managerEmployee.jsp");
 						}
-							
-						else
-						{
+
+						else {
 							// username or password mistake
 							response.sendRedirect("passMistake.jsp");
 						}
 					}
-				} catch(Exception e)
-				{
+				} catch (Exception e) {
 					e.printStackTrace();
-				}
-				finally{
-					try{conn.close();}catch(Exception ee){};
+				} finally {
+					try {
+						conn.close();
+					} catch (Exception ee) {
+					}
+					;
 				}
 			}
 		}
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 }
