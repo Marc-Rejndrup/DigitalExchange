@@ -50,7 +50,7 @@ public class EmployeeEmployeeServlet extends HttpServlet {//might need to handle
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("employeeEmployee.jsp");
 		view.forward(request, response);    
 	}
 }

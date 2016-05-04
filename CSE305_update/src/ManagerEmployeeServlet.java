@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import dataType.DataTypeClient;
+import dataType.DataTypeEmployee;
 
 public class ManagerEmployeeServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("managerEmployee.jsp");
 		view.forward(request, response);    
 	}
 }
