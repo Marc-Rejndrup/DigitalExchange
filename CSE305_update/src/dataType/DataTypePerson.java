@@ -7,6 +7,19 @@ public class DataTypePerson implements java.io.Serializable{
 	private String address;
 	private String telephone;
 	
+<<<<<<< HEAD
+=======
+	// Default constructor
+	public DataTypePerson() {
+	}
+	
+	// Used by DataTypeClient's super(name,tele#)
+	public DataTypePerson(String fullName,String telephone){
+		this.fullName = fullName;
+		this.telephone = telephone;
+	}
+	
+>>>>>>> a76bfa50f3d61950b4ddcb02cfc73bddca169424
 	public String getSsn() {
 		return ssn;
 	}
