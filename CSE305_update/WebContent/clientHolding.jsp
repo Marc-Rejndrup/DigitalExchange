@@ -5,16 +5,15 @@
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	</head>
 	<body>
+		<h1>Your holdings:</h1>
 		<table>
 			<tr>
 				<th>Symbol</th>
 				<th>Amount</th>
-				<!--<th>Account</th>-->
 			</tr>
 			<c:forEach var="item" items="${HoldingTable}" >
 				<td>${item.stockSymbol}</td>
 				<td>${item.amount}</td>
-				<!--<td>${item.accountId}</td>-->
 			</c:forEach>
 		</table>
 	</body>

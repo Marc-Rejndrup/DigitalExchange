@@ -48,6 +48,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 				list.add(data);
 			}
 			request.getSession().setAttribute("ManagerSymbolRevenueTable", list);
+			rs.close();
 			
 			rs = stmt1.executeQuery("select O.AccNum, sum(O.FilledPrice * O.NumShares) AS Revenue "
 					+ "from Orders as O "
@@ -61,6 +62,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 				list.add(data);
 			}
 			request.getSession().setAttribute("ManagerAccountRevenueTable", list);
+			rs.close();
 			
 			rs = stmt1.executeQuery("select S.type, sum(Rev.Revenue) as Revenue "
 					+ "from (select s.symbol, s.type from stock s inner join ( "

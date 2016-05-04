@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
 import dataType.DataTypeStock;
+import dataType.DataTypeStockCount;
 
 public class ManagerStockServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,6 +49,22 @@ public class ManagerStockServlet extends HttpServlet {//might need to handle doG
 				list.add(data);
 			}
 			request.getSession().setAttribute("ManagerStockTable", list);
+			rs.close();
+			
+			rs = stmt1.executeQuery("select O.Symbol, count(O.Symbol) as num "
+					+ "from orders O "
+					+ "where O.FilledPrice IS NOT NULL "
+					+ "group by O.Symbol "
+					+ "order by num desc;");
+			List<DataTypeStockCount> list2 = new ArrayList<DataTypeStockCount>();
+			while(rs.next()){
+				DataTypeStockCount data = new DataTypeStockCount();
+				data.setStock(rs.getString(1));
+				data.setCount(rs.getString(2));
+				list2.add(data);
+			}
+			request.getSession().setAttribute("ManagerStockCountTable", list2);
+			
 			rs.close();
 			conn.close();
 		}catch(Exception e){

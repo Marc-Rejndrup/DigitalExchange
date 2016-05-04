@@ -41,12 +41,12 @@
 		<url-pattern>/changestock</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>changeemployee</servlet-name>
-		<servlet-class>changeEmployeeServlet</servlet-class>
+		<servlet-name>editemployee</servlet-name>
+		<servlet-class>EditEmployeeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>changeemployee</servlet-name>
-		<url-pattern>/changeemployee</url-pattern>
+		<servlet-name>editemployee</servlet-name>
+		<url-pattern>/editemployee</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>getorder</servlet-name>

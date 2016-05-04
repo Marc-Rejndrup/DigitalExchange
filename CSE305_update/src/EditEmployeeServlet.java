@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class changeEmployeeServlet extends HttpServlet{
+/*
+ * Servlet to EDIT AND DELETE an employee, his accounts, and his person
+ */
+public class EditEmployeeServlet extends HttpServlet{
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
 		 
@@ -17,12 +19,13 @@ public class changeEmployeeServlet extends HttpServlet{
 		          String stuId = ""+session.getValue("login");
 		          
 
-		  		String ssn = request.getParameter("empssn");
-				String name = request.getParameter("empname");
-				String address = request.getParameter("empaddress");
-				String zipcode = request.getParameter("empzipcode");
-				String telephone = request.getParameter("emptelephone");
-				String hourlyrate = request.getParameter("emphourlyrate");
+		  		String ssn = request.getParameter("act");
+		  		String delete = request.getParameter("delete");
+				String name = request.getParameter("name" + ssn);
+				String address = request.getParameter("address" + ssn);
+				String zipcode = request.getParameter("zipCode" + ssn);
+				String telephone = request.getParameter("telephone" + ssn);
+				String hourlyrate = request.getParameter("hourlyRate" + ssn);
 				
 		     	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 		     	String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
@@ -43,18 +46,28 @@ public class changeEmployeeServlet extends HttpServlet{
 		            			conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
 		            			System.out.println("Connected successfully to database using JConnect");
 		            
-		            			java.sql.Statement stmt1=conn.createStatement();
-									//stmt1.executeUpdate("update Stock set PricePerShare='"+amt+"' where StockSymbol='"+symbol+"'");
-		            			if(!name.equals(""))
+	            				java.sql.Statement stmt1=conn.createStatement();
+
+		            			if(ssn != null){
 		            				stmt1.executeUpdate("update Person set Name='"+name+"' where ssn='"+ssn+"'");
-		            			if(!address.equals(""))
-		            				stmt1.executeUpdate("update Person set Zipcode='"+address+"' where ssn='"+ssn+"'");
-		            			if(!zipcode.equals(""))
+		            				stmt1.executeUpdate("update Person set Address='"+address+"' where ssn='"+ssn+"'");
 		            				stmt1.executeUpdate("update Person set Zipcode='"+zipcode+"' where ssn='"+ssn+"'");
-		            			if(!telephone.equals(""))
 		            				stmt1.executeUpdate("update Person set Telephone='"+telephone+"' where ssn='"+ssn+"'");
-		            			if(!hourlyrate.equals(""))
 		            				stmt1.executeUpdate("update Employee set HourlyRate='"+hourlyrate+"' where ssn='"+ssn+"'");
+		            			}
+		            			else{
+		            				java.sql.ResultSet rs = stmt1.executeQuery("select AccNum from Account where EmpNum='"+ssn+"'");
+		            				while(rs.next()){
+		            					String accNum = rs.getString(1);
+		            					stmt1.executeUpdate("delete from orders where AccNum='"+accNum+"'");
+		            				}
+		            				stmt1.executeUpdate("delete from account where empNum='"+delete+"'");
+		            				stmt1.executeUpdate("delete from employee where ssn='"+delete+"'");
+		            				stmt1.executeUpdate("delete from person where ssn='"+delete+"'");
+		            				System.out.println("All traces of employee " + delete + " have been removed!");
+		            				rs.close();
+		            			}
+		            				
 		            			
 					} catch(Exception e)
 					{
@@ -66,15 +79,10 @@ public class changeEmployeeServlet extends HttpServlet{
 						try{conn.close();}catch(Exception ee){};
 					}
 		 
-		   
 
 		  
 		  
-		  
-		  
-		  
-		  
-		  RequestDispatcher view = request.getRequestDispatcher("FacultyInformation.jsp");
+		  RequestDispatcher view = request.getRequestDispatcher("managerEmployee.jsp");
 	      view.forward(request, response);    
 	    }
 }

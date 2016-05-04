@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import dataType.DataTypeOrder;
 
-import dataType.DataTypeEmployee;
-import dataType.DataTypeHolding;
 
 public class ClientOrderServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,14 +31,22 @@ public class ClientOrderServlet extends HttpServlet {//might need to handle doGe
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);
-			List<DataTypeHolding> list = new ArrayList<DataTypeHolding>();
+			rs = stmt1.executeQuery("SELECT * FROM orders WHERE AccNum = "+accountID);
+			List<DataTypeOrder> list = new ArrayList<DataTypeOrder>();
 			while(rs.next()){
-				DataTypeEmployee data = new DataTypeEmployee();
-				//data.setAccNum(rs.getString(1));
-				//data.setSymbol(rs.getString(2));
-				//data.setQuantity(rs.getString(3));
-				//list.add(data);
+				DataTypeOrder data = new DataTypeOrder();
+				data.setAccountId(rs.getString(1));
+				data.setId(rs.getString(2));
+				data.setBuySell(rs.getString(3));
+				data.setNumShares(rs.getString(4));
+				data.setDateTime(rs.getString(5));
+				data.setFee(rs.getString(6));
+				data.setStock(rs.getString(7));
+				data.setPricePerShare(rs.getString(8));
+				data.setPercentage(rs.getString(9));
+				data.setPrice(rs.getString(10));
+				data.setOrderType(rs.getString(11));
+				list.add(data);
 			}
 			request.setAttribute("ClientOrderTable", list);
 			rs.close();
