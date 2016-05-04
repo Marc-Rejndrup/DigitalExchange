@@ -1,23 +1,11 @@
 package dataType;
 
-public class DataTypeEmployee implements java.io.Serializable{
-	private String id;
-	private String ssn;
+public class DataTypeEmployee extends DataTypePerson{
 	private String hourlyRate;
 	private String startDate;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getSsn() {
-		return ssn;
-	}
-	public void setSsn(String ssn) {
-		this.ssn = ssn;
-	}
+	private String ssn;
+	private String employeeId;
+	private String manager;
 	public String getHourlyRate() {
 		return hourlyRate;
 	}
@@ -30,4 +18,23 @@ public class DataTypeEmployee implements java.io.Serializable{
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
+	public String getSsn() {
+		return ssn;
+	}
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
+	public String getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
+
 }

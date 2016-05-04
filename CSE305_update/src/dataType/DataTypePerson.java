@@ -3,10 +3,9 @@ package dataType;
 public class DataTypePerson implements java.io.Serializable{
 	private String ssn;
 	private String zipCode;
-	private String fullName;
+	private String name;
 	private String address;
 	private String telephone;
-	
 	public String getSsn() {
 		return ssn;
 	}
@@ -19,11 +18,11 @@ public class DataTypePerson implements java.io.Serializable{
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	public String getFullName() {
-		return fullName;
+	public String getName() {
+		return name;
 	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getAddress() {
 		return address;
@@ -37,4 +36,5 @@ public class DataTypePerson implements java.io.Serializable{
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
 }

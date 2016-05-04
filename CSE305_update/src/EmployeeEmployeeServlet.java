@@ -30,7 +30,7 @@ public class EmployeeEmployeeServlet extends HttpServlet {//might need to handle
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			rs = stmt1.executeQuery("SELECT * FROM Employee AS e, Person AS p WHERE e.name = p.name && e.telephone = p.telephone");
+			rs = stmt1.executeQuery("SELECT * FROM Employee AS e, Person AS p WHERE e.ssn = p.ssn");
 			List<DataTypeEmployee> list = new ArrayList<DataTypeEmployee>();
 			while(rs.next()){
 				DataTypeEmployee data = new DataTypeEmployee();
@@ -39,7 +39,7 @@ public class EmployeeEmployeeServlet extends HttpServlet {//might need to handle
 				//data.setHourlyRate(rs.getString(3));
 				data.setStartDate(rs.getString(4));
 				data.setSsn(rs.getString(5));
-				data.setEmployeeId(rs.getString(6));
+				data.setId(rs.getString(6));
 				list.add(data);
 			}
 			request.setAttribute("EmployeeClientTable", list);
