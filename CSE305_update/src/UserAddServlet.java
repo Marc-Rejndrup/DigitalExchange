@@ -54,14 +54,6 @@ public class UserAddServlet extends HttpServlet {
 		int zipcode = Integer.parseInt(request.getParameter("zipcode"));
 		String address = request.getParameter("address");
 		
-		// client specific
-		String email = request.getParameter("email");
-		String creditcard = request.getParameter("creditcard");
-		
-		// employee specific
-		double hourlyrate = Double.parseDouble(request.getParameter("hourlyrate"));
-		String manager = request.getParameter("manager");
-		System.out.println(manager);
 		
 		String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 
@@ -83,14 +75,22 @@ public class UserAddServlet extends HttpServlet {
 			System.out.println("Connected successfully to database using JConnect");
 
 			java.sql.Statement stmt1=conn.createStatement();
-			if (request.getParameter("target").trim().equals("student"))
+			if (request.getParameter("target").trim().equals("client"))
 			{
+				// client specific
+				String email = request.getParameter("email");
+				String creditcard = request.getParameter("creditcard");
+				
 				stmt1.executeUpdate("insert into Person values('"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"', '"+ssn+"')");
-				//stmt1.executeUpdate("insert into Client values('"+email+"', 1, '"+creditcard+"', '"+ssn+"')");
+				stmt1.executeUpdate("insert into Client values('"+email+"', '"+ssn+"', '"+creditcard+"', 1, '"+ssn+"')");
 				stmt1.close();
 			}
 			else
 			{			
+				// employee specific
+				double hourlyrate = Double.parseDouble(request.getParameter("hourlyrate"));
+				String manager = request.getParameter("manager");
+				
 				stmt1.executeUpdate("insert into Person values('"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"', '"+ssn+"')");
 				stmt1.executeUpdate("insert into Employee values('"+hourlyrate+"', DATE_FORMAT(NOW(),'%Y-%m-%d'), '"+ssn+"', '"+ssn+"', '"+manager+"')"); 
 				
