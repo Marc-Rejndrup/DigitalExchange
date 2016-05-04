@@ -78,18 +78,14 @@ public class UserAddServlet extends HttpServlet {
 			java.sql.Statement stmt1=conn.createStatement();
 			if (request.getParameter("target").trim().equals("student"))
 			{
-				//stmt1.executeUpdate("insert into Student values('"+Id+"','"+Password1+"','"+Name+"','"+request.getParameter("status")+"')");
-				//							out.print("insert into Student values('"+Id+"','"+Password1+"','"+Name+"','"+request.getParameter("status")+"')");
 				stmt1.executeUpdate("insert into Person values('"+Id+"', '"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"')");
 				stmt1.executeUpdate("insert into Client values('"+email+"', 1, '"+creditcard+"', '"+Id+"')");
 				stmt1.close();
 			}
 			else
 			{
-				Date d1 = new Date(System.currentTimeMillis());
-				String d2 = "" + d1.getYear() + "-" + d1.getMonth() + "-" + d1.getDay();
 				stmt1.executeUpdate("insert into Person values('"+Id+"', '"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"')");
-				stmt1.executeUpdate("insert into Employee values('"+Id+"', '"+Id+"', " + d2 + ", 0)"); 
+				stmt1.executeUpdate("insert into Employee values('"+Id+"', '"+Id+"', DATE_FORMAT(NOW(),'%Y-%m-%d'), 0)"); 
 				System.out.println("Id:		"+Id);
 
 				//							out.print("insert into Professor values('"+Id+"','"+Password1+"','"+Name+"','"+request.getParameter("DepID")+"')");;
