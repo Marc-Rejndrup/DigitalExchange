@@ -7,6 +7,11 @@ public class DataTypePerson {
 	private String address;
 	private String telephone;
 	
+	public DataTypePerson(String fullName,String telephone){
+		this.fullName = fullName;
+		this.telephone = telephone;
+	}
+	
 	public String getSsn() {
 		return ssn;
 	}
