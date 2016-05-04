@@ -1,3 +1,5 @@
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 		String mysPassword = "1234";
 		//get Parameters
 		//String x = request.getParameter("y");
+		System.out.println("Manager Employee Servlet Reached!");
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
@@ -30,22 +33,21 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			rs = stmt1.executeQuery("SELECT SSN, Name, EmployeeID, Manager, HourlyRate, StartDate, Telephone, Address, zipCode FROM Employee AS e, Person AS p WHERE e.ssn = p.ssn");
+			rs = stmt1.executeQuery("SELECT * FROM Employee AS e, Person AS p WHERE e.ssn = p.ssn");
 			List<DataTypeEmployee> list = new ArrayList<DataTypeEmployee>();
 			while(rs.next()){
 				DataTypeEmployee data = new DataTypeEmployee();
-				data.setSsn(rs.getString(1));
-				data.setName(rs.getString(2));
-				data.setEmployeeId(rs.getString(3));
-				data.setManager(rs.getString(4));
-				data.setHourlyRate(rs.getString(5));
-				data.setStartDate(rs.getString(6));
-				data.setTelephone(rs.getString(7));
-				data.setAddress(rs.getString(8));
-				data.setZipCode(rs.getString(9));
+				data.setHourlyRate(rs.getString(1));
+				data.setStartDate(rs.getString(2));
+				data.setSsn(rs.getString(3));
+				data.setEmployeeId(rs.getString(4));
+				data.setName(rs.getString(6));
+				data.setAddress(rs.getString(7));
+				data.setZipCode(rs.getString(8));
+				data.setTelephone(rs.getString(9));
 				list.add(data);
 			}
-			request.setAttribute("EmployeeClientTable", list);
+			request.setAttribute("ManagerEmployeeTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
