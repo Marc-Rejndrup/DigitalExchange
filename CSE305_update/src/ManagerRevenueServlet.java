@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
+import dataType.DataTypeRevenue;
 
 public class ManagerRevenueServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,13 +34,19 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
 			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
+			rs = stmt1.executeQuery("select O.AccNum, sum(O.FilledPrice * O.NumShares) AS Revenue "
+					+ "from Orders as O "
+					+ "where O.OrderType='sell';");
 			//type the list.
-			//List<x> list = new ArrayList<x>();
+			List<DataTypeRevenue> list = new ArrayList<DataTypeRevenue>();
 			while(rs.next()){
-				//build table
+				DataTypeRevenue data = new DataTypeRevenue();
+				System.out.println("AccNum: " + rs.getString(1));
+				data.setAccNum(rs.getString(1));
+				data.setRevenue(rs.getString(2));
+				list.add(data);
 			}
-			//request.setAttribute("TableNAME", list);
+			request.getSession().setAttribute("ManagerRevenueTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
@@ -47,7 +54,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("managerRevenue.jsp");
 		view.forward(request, response);    
 	}
 }

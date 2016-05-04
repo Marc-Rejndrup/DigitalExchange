@@ -4,8 +4,33 @@
 <title>Insert title here</title>
 		<%@include file="managerHeader.jsp"%>
 </head>
-<body>
+	<body>
+		<table>
+			<tr>
+				<th>Account ID</th>
+				<th>Name</th>
+			</tr>
+			<c:forEach var="item" items="${sessionScope.ManagerRevenueTable}" >
+			<tr>
+				<td>${item.accNum}</td>
+				<td>${item.revenue}</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
+	</body>
+		
 	<footer>
 	</footer>
-</body>
+	<script>
+	$(function(){
+		$.ajax({
+			type: "POST",
+			url: "managerRevenue",
+			context: document.body
+		});
+	});
+	
+
+	</script>
 </html>

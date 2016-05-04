@@ -88,6 +88,14 @@
 		<servlet-name>managerStock</servlet-name>
 		<url-pattern>/managerStock</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerRevenue</servlet-name>
+		<servlet-class>ManagerRevenueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerRevenue</servlet-name>
+		<url-pattern>/managerRevenue</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>other.LoginFilter</filter-class>
