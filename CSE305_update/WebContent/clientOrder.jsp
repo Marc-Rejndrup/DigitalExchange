@@ -16,17 +16,18 @@
 				<th>Type</th>
 				<th>Trailing</th>
 				<th>Completed At</th>
-
 			</tr>
 			<c:forEach var="item" items="${HoldingTable}" >
-				<td>${item.accountId }
-				<td>${item.stock}</td>
-				<td>${item.buySell}</td>
-				<td>${item.numShares}</td>
-				<td>${item.dateTime}</td>
-				<td>${item.orderType}</td>
-				<td>${empty item.percentage ? item.pricePerShare : item.percentage}</td>
-				<td>${empty item.price ? "Not completed." : item.price}</td>
+				<tr>
+					<td>${item.accountId }
+					<td>${item.stock}</td>
+					<td>${item.buySell}</td>
+					<td>${item.numShares}</td>
+					<td>${item.dateTime}</td>
+					<td>${item.orderType}</td>
+					<td>${empty item.percentage ? item.pricePerShare : item.percentage}</td>
+					<td>${empty item.price ? "Not completed." : item.price}</td>
+				</tr>
 			</c:forEach>
 		</table>
 	</body>

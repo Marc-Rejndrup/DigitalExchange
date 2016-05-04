@@ -10,10 +10,12 @@
 			<tr>
 				<th>Symbol</th>
 				<th>Amount</th>
+				<th>History</th>
 			</tr>
 			<c:forEach var="item" items="${HoldingTable}" >
 				<td>${item.stockSymbol}</td>
 				<td>${item.amount}</td>
+				<td><!--go to history button --></td>
 			</c:forEach>
 		</table>
 	</body>

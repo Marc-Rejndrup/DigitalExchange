@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div id="managerFooter">
+<div class="NavLinks" id="managerFooter">
 	<a href="managerEmployee.jsp">Employee</a>
 	<a href="managerRevenue.jsp">Revenue</a>
 	<a href="managerStock.jsp">Stock</a>
