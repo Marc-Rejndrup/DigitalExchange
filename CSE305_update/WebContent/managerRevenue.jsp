@@ -8,7 +8,7 @@
 		<table>
 			<tr>
 				<th>Account ID</th>
-				<th>Name</th>
+				<th>Revenue</th>
 			</tr>
 			<c:forEach var="item" items="${sessionScope.ManagerRevenueTable}" >
 			<tr>

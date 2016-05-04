@@ -36,7 +36,8 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 			//make query
 			rs = stmt1.executeQuery("select O.AccNum, sum(O.FilledPrice * O.NumShares) AS Revenue "
 					+ "from Orders as O "
-					+ "where O.OrderType='sell';");
+					+ "where O.OrderType='sell' "
+					+ "group by O.AccNum;");
 			//type the list.
 			List<DataTypeRevenue> list = new ArrayList<DataTypeRevenue>();
 			while(rs.next()){
