@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dataType.DataTypeClient;
+import dataType.DataTypeEmployee;
 import dataType.DataTypeHolding;
 
 public class ManagerClientServlet extends HttpServlet {//might need to handle doGet.
@@ -32,14 +35,21 @@ public class ManagerClientServlet extends HttpServlet {//might need to handle do
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
-			//type the list.
-			//List<x> list = new ArrayList<x>();
+			rs = stmt1.executeQuery("SELECT * FROM Client AS c, Person AS p WHERE c.ssn = p.ssn");
+			List<DataTypeClient> list = new ArrayList<DataTypeClient>();
 			while(rs.next()){
-				//build table
+				DataTypeClient data = new DataTypeClient();
+				data.setEmail(rs.getString(1));
+				data.setCustNum(rs.getString(2));
+				data.setCreditCard(rs.getString(3));
+				data.setRating(rs.getString(4));
+				data.setName(rs.getString(6));
+				data.setAddress(rs.getString(7));
+				data.setZipCode(rs.getString(8));
+				data.setTelephone(rs.getString(9));
+				list.add(data);
 			}
-			//request.setAttribute("TableNAME", list);
+			request.getSession().setAttribute("ManagerClientTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
@@ -47,7 +57,7 @@ public class ManagerClientServlet extends HttpServlet {//might need to handle do
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("managerClient.jsp");
 		view.forward(request, response);    
 	}
 }

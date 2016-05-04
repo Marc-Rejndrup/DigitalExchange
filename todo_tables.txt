@@ -1,6 +1,10 @@
-manager tables
-employee (e)
-revenue (for stock, stocktype, cust)
+manager tables							?	
+employee (e)							?
+
+revenue (for stock, stocktype, cust)	Done (to be checked)
+											O.Symbol, O.CompPrice (Order O) should be invalid references, but for now I just copied the query verbatim from HW2 doc
+											I probably should have used DataTypeOrder instead of DataTypeStock, but there's confusion over where to put particular values (revenue,symbol,accnum)
+											
 stock(+, edit price)
 order
 customer (with delete)
@@ -15,3 +19,11 @@ Stock ()
 Holding
 Orders (+)
 History (stocks)
+
+
+
+
+
+
+
+? = Assumed to be finished, but I'm not sure. -Wei

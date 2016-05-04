@@ -2,37 +2,48 @@
 <html lang="en">
 	<head>
 		<title>Manage Employees</title>
-		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+		<%@include file="managerHeader.jsp"%>
 	</head>
 	<body>
 		<table>
 			<tr>
+				<th>ID</th>
 				<th>Name</th>
 				<th>SSN</th>
-				<th>ID</th>
-				<th>Manager</th>
 				<th>Hourly Pay</th>
 				<th>Employed Since</th>
 				<th>Telephone</th>
 				<th>Address</th>
 				<th>Zip Code</th>
+				<th>Edit</th>
 			</tr>
-			<c:forEach var="item" items="${ManagerEmployeeTable}">
+			<c:forEach var="item" items="${sessionScope.ManagerEmployeeTable}">
+			<form action="editemployee" method="post">
 				<tr>
-					<td>${item.name}</td>
-					<td>${item.ssn}</td>
 					<td>${item.employeeId}</td>
-					<td>${item.manager}</td>
-					<td>${item.hourlyRate}</td>
+					<td><input name='name${item.ssn}' value='${item.name}' /></td>
+					<td>${item.ssn}</td>
+					<td><input name='hourlyRate${item.ssn}' value='${item.hourlyRate}' /></td>
 					<td>${item.startDate}</td>
-					<td>${item.telephone}</td>
-					<td>${item.address}</td>
-					<td>${item.zipCode}</td>
+					<td><input name='telephone${item.ssn}' value='${item.telephone}' /></td>
+					<td><input name='address${item.ssn}' value='${item.address}' /></td>
+					<td><input name='zipCode${item.ssn}' value='${item.zipCode}' /></td>
+					<td><input type='submit' name='act' value='${item.ssn}' /></td>
 				</tr>
+			</form>
 			</c:forEach>
 		</table>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 	</body>
+		
 	<footer>
-		<%@include file="managerFooter.jsp"%>
 	</footer>
+	<script>
+		$.ajax({
+			type: "POST",
+			url: "managerEmployee",
+			context: document.body
+		});
+		
+	</script>
 </html>

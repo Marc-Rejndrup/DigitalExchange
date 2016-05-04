@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
+import dataType.DataTypeStock;
 
 public class ManagerStockServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,13 +34,20 @@ public class ManagerStockServlet extends HttpServlet {//might need to handle doG
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
 			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
-			//type the list.
-			//List<x> list = new ArrayList<x>();
+			rs = stmt1.executeQuery("select * from stock s inner join"
+					+ " (select symbol, max(date) as md from stock group by symbol) ss"
+					+ " on s.symbol = ss.symbol and s.date = ss.md");
+			List<DataTypeStock> list = new ArrayList<DataTypeStock>();
 			while(rs.next()){
-				//build table
+				DataTypeStock data = new DataTypeStock();
+				data.setSymbol(rs.getString(1));
+				data.setName(rs.getString(2));
+				data.setType(rs.getString(3));
+				data.setDate(rs.getString(4));
+				data.setPrice(rs.getString(5));
+				list.add(data);
 			}
-			//request.setAttribute("TableNAME", list);
+			request.getSession().setAttribute("ManagerStockTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
@@ -47,7 +55,7 @@ public class ManagerStockServlet extends HttpServlet {//might need to handle doG
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("managerStock.jsp");
 		view.forward(request, response);    
 	}
 }

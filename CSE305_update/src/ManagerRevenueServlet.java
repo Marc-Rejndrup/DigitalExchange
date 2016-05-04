@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
+import dataType.DataTypeRevenue;
 
 public class ManagerRevenueServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,6 +23,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 		String mysPassword = "1234";
 		//get Parameters
 		//String x = request.getParameter("y");
+		String x = request.getParameter("getby");
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
@@ -32,14 +34,53 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
-			//type the list.
-			//List<x> list = new ArrayList<x>();
+			
+			rs = stmt1.executeQuery("select O.Symbol, sum(O.FilledPrice * O.NumShares) AS Revenue "
+						+ "from Orders as O "
+						+ "where O.OrderType='sell' "
+						+ "group by O.Symbol;");
+			List<DataTypeRevenue> list = new ArrayList<DataTypeRevenue>();
+			DataTypeRevenue data;
 			while(rs.next()){
-				//build table
+				data = new DataTypeRevenue();
+				data.setSymbol(rs.getString(1));
+				data.setRevenue(rs.getString(2));
+				list.add(data);
 			}
-			//request.setAttribute("TableNAME", list);
+			request.getSession().setAttribute("ManagerSymbolRevenueTable", list);
+			
+			rs = stmt1.executeQuery("select O.AccNum, sum(O.FilledPrice * O.NumShares) AS Revenue "
+					+ "from Orders as O "
+					+ "where O.OrderType='sell' "
+					+ "group by O.AccNum;");
+			list = new ArrayList<DataTypeRevenue>();
+			while(rs.next()){
+				data = new DataTypeRevenue();
+				data.setAccNum(rs.getString(1));
+				data.setRevenue(rs.getString(2));
+				list.add(data);
+			}
+			request.getSession().setAttribute("ManagerAccountRevenueTable", list);
+			
+			rs = stmt1.executeQuery("select S.type, sum(Rev.Revenue) as Revenue "
+					+ "from (select s.symbol, s.type from stock s inner join ( "
+					+ "select symbol, max(date) as md from stock group by symbol "
+					+ ") ss on s.symbol = ss.symbol and s.date = ss.md) as S "
+					+ "left outer join (select O.symbol as symbol, sum(O.FilledPrice * O.NumShares) AS Revenue "
+					+ "from Orders as O "
+					+ "where O.OrderType='sell' "
+					+ "GROUP BY symbol) as Rev "
+					+ "on Rev.symbol=S.symbol "
+					+ "GROUP by S.type; ");
+			list = new ArrayList<DataTypeRevenue>();
+			while(rs.next()){
+				data = new DataTypeRevenue();
+				data.setType(rs.getString(1));
+				data.setRevenue(rs.getString(2));
+				list.add(data);
+			}
+			request.getSession().setAttribute("ManagerTypeRevenueTable", list);
+			
 			rs.close();
 			conn.close();
 		}catch(Exception e){
@@ -47,7 +88,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("managerRevenue.jsp");
 		view.forward(request, response);    
 	}
 }

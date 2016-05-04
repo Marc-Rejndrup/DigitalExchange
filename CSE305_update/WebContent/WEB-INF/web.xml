@@ -41,12 +41,12 @@
 		<url-pattern>/changestock</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>changeemployee</servlet-name>
-		<servlet-class>changeEmployeeServlet</servlet-class>
+		<servlet-name>editemployee</servlet-name>
+		<servlet-class>EditEmployeeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>changeemployee</servlet-name>
-		<url-pattern>/changeemployee</url-pattern>
+		<servlet-name>editemployee</servlet-name>
+		<url-pattern>/editemployee</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>getorder</servlet-name>
@@ -63,6 +63,38 @@
 	<servlet-mapping>
 		<servlet-name>createorder</servlet-name>
 		<url-pattern>/createorder</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerEmployee</servlet-name>
+		<servlet-class>ManagerEmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerEmployee</servlet-name>
+		<url-pattern>/managerEmployee</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerClient</servlet-name>
+		<servlet-class>ManagerClientServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerClient</servlet-name>
+		<url-pattern>/managerClient</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerStock</servlet-name>
+		<servlet-class>ManagerStockServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerStock</servlet-name>
+		<url-pattern>/managerStock</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerRevenue</servlet-name>
+		<servlet-class>ManagerRevenueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerRevenue</servlet-name>
+		<url-pattern>/managerRevenue</url-pattern>
 	</servlet-mapping>
 	<filter>
 		<filter-name>LoginFilter</filter-name>

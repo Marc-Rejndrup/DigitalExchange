@@ -79,7 +79,7 @@ public class PersonalizedStockServlet extends HttpServlet{
    			
    			
    			
-   			RequestDispatcher view = request.getRequestDispatcher("orderlist.jsp");
+   			RequestDispatcher view = request.getRequestDispatcher("PersonalizedStock.jsp");
    			view.forward(request, response);
    		}
 
