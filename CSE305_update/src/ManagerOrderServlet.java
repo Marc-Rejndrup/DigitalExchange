@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
+import dataType.DataTypeOrder;
 
 public class ManagerOrderServlet extends HttpServlet {//might need to handle doGet.
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 		String loginID = ""+session.getAttribute("login");
 		String accountID = ""+session.getAttribute("account");
@@ -20,8 +21,10 @@ public class ManagerOrderServlet extends HttpServlet {//might need to handle doG
 		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
 		String mysUserID = "root"; 
 		String mysPassword = "1234";
-		//get Parameters
-		//String x = request.getParameter("y");
+
+		String getSym = request.getParameter("stockSymbol");
+		String custNum = request.getParameter("custNum");
+		
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
@@ -32,14 +35,37 @@ public class ManagerOrderServlet extends HttpServlet {//might need to handle doG
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
-			//type the list.
-			//List<x> list = new ArrayList<x>();
-			while(rs.next()){
-				//build table
+			
+			if(getSym.equals("")){
+				rs = stmt1.executeQuery("SELECT * FROM Orders as O, Account as A "
+						+ "where A.AccNum=O.AccNum and A.CustNum='"+custNum+"'");
 			}
-			//request.setAttribute("TableNAME", list);
+			else{
+				rs = stmt1.executeQuery("SELECT * FROM Orders WHERE Symbol='"+getSym+"'");
+				System.out.println("You entered this stock: " + getSym);
+			}
+			
+			
+			List<DataTypeOrder> list = new ArrayList<DataTypeOrder>();
+
+			while(rs.next()){
+				DataTypeOrder data = new DataTypeOrder();
+				data.setAccountId(rs.getString(1));
+				data.setId(rs.getString(2));
+				data.setBuySell(rs.getString(3));
+				data.setNumShares(rs.getString(4));
+				data.setDateTime(rs.getString(5));
+				data.setFee(rs.getString(6));
+				data.setStock(rs.getString(7));
+				data.setPricePerShare(rs.getString(8));
+				data.setPercentage(rs.getString(9));
+				data.setPrice(rs.getString(10));
+				data.setOrderType(rs.getString(11));
+				System.out.println("Order ID: " + rs.getString(2));
+				list.add(data);
+			}
+		
+			request.getSession().setAttribute("ManagerOrderTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
@@ -47,7 +73,7 @@ public class ManagerOrderServlet extends HttpServlet {//might need to handle doG
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("managerOrder.jsp");
 		view.forward(request, response);    
 	}
 }

@@ -96,6 +96,14 @@
 		<servlet-name>managerRevenue</servlet-name>
 		<url-pattern>/managerRevenue</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerOrder</servlet-name>
+		<servlet-class>ManagerOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerOrder</servlet-name>
+		<url-pattern>/managerOrder</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>other.LoginFilter</filter-class>

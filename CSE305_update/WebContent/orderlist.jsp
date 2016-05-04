@@ -2,33 +2,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 Order Table
-<table>
-<tr>
-	<td>Id</td>
-	<td>ClientId</td>
-	<td>Date</td>
-	<td>Stock</td>
-	<td>PPS</td>
-	<td>Order Type</td>
-	<td>Price Type</td>
-	<td>Percentage</td>
-	<td># Shares</td>
-</tr>
-<c:forEach var="type" items="${orderinfo}">
-<tr>
-    <td>${type.id}</td>
-    <td>${type.accountId}</td>
-    <td>${type.dateTime}</td>
-    <td>${type.stock}</td>
-    <td>${type.pricePerShare}</td>
-    <td>${type.orderType}</td>
-    <td>${type.price}</td>
-    <td>${type.percentage}</td>
-    <td>${type.numShares}</td>
-</tr>
-</c:forEach>
-</table>
-<form name="myForm" action="FacultyInformation.jsp" method="post">
+		<div>
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Account Id</th>
+					<th>Stock</th>
+					<th>#</th>
+					<th>Order Type</th>
+					<th>Price Type</th>
+					<th>Timestamp</th>
+					<th>Fee</th>
+					<th>Percentage</th>
+					<th>PPS</th>
+					<th>Price</th>
+				</tr>
+				<c:forEach var="item" items="${ManagerOrderTable}">
+					<tr>
+						<td>${item.id}</td>
+						<td>${item.accountId}</td>
+						<td>${item.stock}</td>
+						<td>${item.numShares}</td>
+						<td>${item.buySell}</td>
+						<td>${item.orderType}</td>
+						<td>${item.dateTime}</td>
+						<td>${item.fee}</td>
+						<td>${item.percentage}</td>
+						<td>${item.pricePerShare}</td>
+						<td>${item.price}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+<form name="myForm" action="managerOrder.jsp" method="post">
 <input id="Button2" type="submit" value="Back" />
 
 </form>
