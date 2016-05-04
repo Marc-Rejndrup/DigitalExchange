@@ -48,7 +48,7 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 				data.setTelephone(rs.getString(9));
 				list.add(data);
 			}
-			request.getSession().setAttribute("ManagerEmployeeTable", list);
+			request.setAttribute("ManagerEmployeeTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){

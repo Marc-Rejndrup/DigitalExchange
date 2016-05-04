@@ -17,7 +17,7 @@
 				<th>Address</th>
 				<th>Zip Code</th>
 			</tr>
-			<c:forEach var="item" items="${sessionScope.ManagerEmployeeTable}">
+			<c:forEach var="item" items="${ManagerEmployeeTable}">
 				<tr>
 					<td>${item.name}</td>
 					<td>${item.ssn}</td>
