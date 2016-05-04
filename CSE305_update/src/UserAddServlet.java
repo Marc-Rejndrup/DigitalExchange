@@ -75,15 +75,26 @@ public class UserAddServlet extends HttpServlet {
 			System.out.println("Connected successfully to database using JConnect");
 
 			java.sql.Statement stmt1=conn.createStatement();
+			
+			stmt1.executeUpdate("insert into Person values('"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"', '"+ssn+"')");
+
 			if (request.getParameter("target").trim().equals("client"))
 			{
 				// client specific
 				String email = request.getParameter("email");
 				String creditcard = request.getParameter("creditcard");
 				
-				stmt1.executeUpdate("insert into Person values('"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"', '"+ssn+"')");
 				stmt1.executeUpdate("insert into Client values('"+email+"', '"+ssn+"', '"+creditcard+"', 1, '"+ssn+"')");
+				
+				java.sql.ResultSet rs = stmt1.executeQuery("select coalesce(max(AccNum), 0) from Account");
+				rs.next();
+								
+				int accnum = Integer.parseInt(rs.getString(1)) + 1;
+				
+				stmt1.executeUpdate("insert into Account values('"+accnum+"', '"+ssn+"', NULL, DATE_FORMAT(NOW(),'%Y-%m-%d'))");
+				
 				stmt1.close();
+				rs.close();
 			}
 			else
 			{			
@@ -91,10 +102,17 @@ public class UserAddServlet extends HttpServlet {
 				double hourlyrate = Double.parseDouble(request.getParameter("hourlyrate"));
 				String manager = request.getParameter("manager");
 				
-				stmt1.executeUpdate("insert into Person values('"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"', '"+ssn+"')");
 				stmt1.executeUpdate("insert into Employee values('"+hourlyrate+"', DATE_FORMAT(NOW(),'%Y-%m-%d'), '"+ssn+"', '"+ssn+"', '"+manager+"')"); 
 				
+				java.sql.ResultSet rs = stmt1.executeQuery("select coalesce(max(AccNum), 0) from Account");
+				rs.next();
+								
+				int accnum = Integer.parseInt(rs.getString(1)) + 1;
+				
+				stmt1.executeUpdate("insert into Account values('"+accnum+"', NULL, '"+ssn+"', DATE_FORMAT(NOW(),'%Y-%m-%d'))");
+
 				stmt1.close();
+				rs.close();
 			}
 		} catch(Exception e)
 		{
