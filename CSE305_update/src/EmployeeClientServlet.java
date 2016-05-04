@@ -35,7 +35,7 @@ public class EmployeeClientServlet extends HttpServlet {//might need to handle d
 			while(rs.next()){
 				DataTypeClient data = new DataTypeClient();
 				//what fields will this have?
-				data.setName(rs.getString(1));
+				data.setFullName(rs.getString(1));
 				data.setTelephone(rs.getString(2));
 				data.setEmail(rs.getString(3));
 				data.setCustNum(rs.getString(4));

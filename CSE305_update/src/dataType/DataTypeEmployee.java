@@ -1,6 +1,6 @@
 package dataType;
 
-public class DataTypeEmployee implements java.io.Serializable{
+public class DataTypeEmployee extends DataTypePerson{
 	private String id;
 	private String ssn;
 	private String hourlyRate;

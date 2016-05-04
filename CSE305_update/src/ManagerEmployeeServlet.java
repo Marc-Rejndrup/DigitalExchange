@@ -36,12 +36,12 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 			List<DataTypeEmployee> list = new ArrayList<DataTypeEmployee>();
 			while(rs.next()){
 				DataTypeEmployee data = new DataTypeEmployee();
-				data.setName(rs.getString(1));
+				data.setFullName(rs.getString(1));
 				data.setTelephone(rs.getString(2));
 				data.setHourlyRate(rs.getString(3));
 				data.setStartDate(rs.getString(4));
 				data.setSsn(rs.getString(5));
-				data.setEmployeeId(rs.getString(6));
+				data.setId(rs.getString(6));
 				list.add(data);
 			}
 			request.setAttribute("EmployeeClientTable", list);

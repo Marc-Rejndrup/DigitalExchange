@@ -10,6 +10,7 @@ public class DataTypeOrder implements java.io.Serializable{
 	private String OrderType;
 	private String AccountId;
 	private String Stock;
+	private String Fee;
 	public String getNumShares() {
 		return NumShares;
 	}
@@ -63,6 +64,12 @@ public class DataTypeOrder implements java.io.Serializable{
 	}
 	public void setStock(String stock) {
 		Stock = stock;
+	}
+	public String getFee() {
+		return Fee;
+	}
+	public void setFee(String fee) {
+		Fee = fee;
 	}
 
 }

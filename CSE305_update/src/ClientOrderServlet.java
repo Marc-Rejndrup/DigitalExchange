@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dataType.DataTypeEmployee;
 import dataType.DataTypeHolding;
 
 public class ClientOrderServlet extends HttpServlet {//might need to handle doGet.
@@ -35,9 +37,9 @@ public class ClientOrderServlet extends HttpServlet {//might need to handle doGe
 			while(rs.next()){
 				DataTypeEmployee data = new DataTypeEmployee();
 				//data.setAccNum(rs.getString(1));
-				data.setSymbol(rs.getString(2));
-				data.setQuantity(rs.getString(3));
-				list.add(data);
+				//data.setSymbol(rs.getString(2));
+				//data.setQuantity(rs.getString(3));
+				//list.add(data);
 			}
 			request.setAttribute("ClientOrderTable", list);
 			rs.close();
