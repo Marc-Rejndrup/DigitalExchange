@@ -10,7 +10,7 @@ customer (with delete)
 
 Wei:
 	employee tables							
-	order (add)								? There's a createOrderServlet already that's linked to facultyInformation.jsp
+	order (add)								Updated. To be checked.
 	customer (edit, maillist_checklist)		
 	employee (-hourly rate)					Done, to be checked
 
