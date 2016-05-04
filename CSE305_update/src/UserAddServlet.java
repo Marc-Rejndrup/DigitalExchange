@@ -45,17 +45,24 @@ public class UserAddServlet extends HttpServlet {
 
 		users.add(user);
 
-		//request.setAttribute("student", student);
-
 		session.setAttribute("users", users);
 
-		int Id = Integer.parseInt(request.getParameter("Id"));
-		String Name = request.getParameter("Name");
+		// person attributes
+		int ssn = Integer.parseInt(request.getParameter("ssn"));
+		String Name = request.getParameter("name");
 		String telephone = request.getParameter("telephone");
-		String email = request.getParameter("email");
 		int zipcode = Integer.parseInt(request.getParameter("zipcode"));
 		String address = request.getParameter("address");
+		
+		// client specific
+		String email = request.getParameter("email");
 		String creditcard = request.getParameter("creditcard");
+		
+		// employee specific
+		double hourlyrate = Double.parseDouble(request.getParameter("hourlyrate"));
+		String manager = request.getParameter("manager");
+		System.out.println(manager);
+		
 		String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 
 		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
@@ -78,17 +85,15 @@ public class UserAddServlet extends HttpServlet {
 			java.sql.Statement stmt1=conn.createStatement();
 			if (request.getParameter("target").trim().equals("student"))
 			{
-				stmt1.executeUpdate("insert into Person values('"+Id+"', '"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"')");
-				stmt1.executeUpdate("insert into Client values('"+email+"', 1, '"+creditcard+"', '"+Id+"')");
+				stmt1.executeUpdate("insert into Person values('"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"', '"+ssn+"')");
+				//stmt1.executeUpdate("insert into Client values('"+email+"', 1, '"+creditcard+"', '"+ssn+"')");
 				stmt1.close();
 			}
 			else
-			{
-				stmt1.executeUpdate("insert into Person values('"+Id+"', '"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"')");
-				stmt1.executeUpdate("insert into Employee values('"+Id+"', '"+Id+"', DATE_FORMAT(NOW(),'%Y-%m-%d'), 0)"); 
-				System.out.println("Id:		"+Id);
-
-				//							out.print("insert into Professor values('"+Id+"','"+Password1+"','"+Name+"','"+request.getParameter("DepID")+"')");;
+			{			
+				stmt1.executeUpdate("insert into Person values('"+Name+"', '"+address+"', '"+zipcode+"', '"+telephone+"', '"+ssn+"')");
+				stmt1.executeUpdate("insert into Employee values('"+hourlyrate+"', DATE_FORMAT(NOW(),'%Y-%m-%d'), '"+ssn+"', '"+ssn+"', '"+manager+"')"); 
+				
 				stmt1.close();
 			}
 		} catch(Exception e)

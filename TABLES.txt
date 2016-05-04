@@ -20,8 +20,6 @@ FOREIGN KEY(SSN) REFERENCES Person(SSN)
 
 
 CREATE TABLE Employee(
-Name			CHAR(20),
-Telephone		CHAR(11),
 HourlyRate		DECIMAL(9,2),
 StartDate		DATE,
 SSN			INTEGER(9),

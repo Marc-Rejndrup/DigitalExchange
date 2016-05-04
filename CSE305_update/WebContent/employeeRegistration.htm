@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Registration for Faculty  -- Student Registration System</title>
+<script language="javascript" type="text/javascript">
+// <!CDATA[
+
+function Button1_onclick() {
+//    alert("UserName Can Not Be Null!")
+document.myForm.submit()
+}
+
+function Button2_onclick() {
+    window.open("RegisterPage.htm","_self");
+
+}
+
+</script>
+
+</head>
+<body>
+
+<h1>Employee Registration</h1>
+        	<form name="myForm" action="useradd" method="post">
+        			<input type="hidden" name="target" value="employee">
+            
+            		<div>
+                	Your SSN:
+                	<input id="ssn" name="ssn" style="width: 145px" type="text" />
+                	</div>
+                	
+					<div>
+                	Your Name:
+                    <input id="name" name="name" style="width: 145px" type="text" />
+                    </div>
+                    
+                    <div>
+                    Your Address: 
+                    <input id="address" name="address" style="width: 200px"/>
+                    </div>
+                    
+                    <div>
+                    Zipcode:
+                    <input id="zipcode" name="zipcode" style="width: 145px"/>
+                    </div>
+                    
+                    <div>
+                    Telephone:
+                    <input id="telephone" name="telephone" style="width: 145px"/>
+                   	</div>
+                   	
+                   	<div>
+                   	Hourly Rate:
+                    	<input id="hourlyrate" name="hourlyrate" style="width: 145px"/>
+                   	</div>
+                   	
+                   	<div>
+                   	Are you a Manager?
+                   	    <input id="Radio1" name="manager" checked="checked" type="radio" value="0"/>NO 
+                   	    <input id="Radio2" name="manager" type="radio" value="1"/>YES
+                   	</div>
+                   	
+                   	<div>
+                    <input type="submit" value="Finish!"/>
+                   	</div>
+                                      
+                   	<form name="myForm2"> 
+                  
+                    <input id="Button3" type="button" value="Cancel"  onclick="window.open('index.htm','_self');" /><br />
+                    
+                    </form>
+
+                </strong></span>
+
+					</form>          
+
+</span></strong>
+
+</body>
+</html>
