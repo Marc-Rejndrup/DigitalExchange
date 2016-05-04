@@ -9,7 +9,7 @@ customer (with delete)
 
 
 Wei:
-	employee tables							
+	employee tables							?
 	order (add)								Updated. To be checked.
 	customer (edit, maillist_checklist)		
 	employee (-hourly rate)					Done, to be checked
