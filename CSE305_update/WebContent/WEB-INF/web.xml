@@ -64,6 +64,14 @@
 		<servlet-name>createorder</servlet-name>
 		<url-pattern>/createorder</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>managerEmployee</servlet-name>
+		<servlet-class>ManagerEmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managerEmployee</servlet-name>
+		<url-pattern>/managerEmployee</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>other.LoginFilter</filter-class>

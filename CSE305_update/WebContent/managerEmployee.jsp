@@ -17,7 +17,7 @@
 				<th>Address</th>
 				<th>Zip Code</th>
 			</tr>
-			<c:forEach var="item" items="${ManagerEmployeeTable}">
+			<c:forEach var="item" items="${sessionScope.ManagerEmployeeTable}">
 				<tr>
 					<td>${item.name}</td>
 					<td>${item.ssn}</td>
@@ -31,8 +31,17 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 	</body>
+		
 	<footer>
 		<%@include file="managerFooter.jsp"%>
 	</footer>
+	<script>
+		$.ajax({
+			type: "POST",
+			url: "managerEmployee",
+			context: document.body
+		});
+	</script>
 </html>
