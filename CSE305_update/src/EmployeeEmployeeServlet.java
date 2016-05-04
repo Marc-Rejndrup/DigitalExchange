@@ -44,7 +44,7 @@ public class EmployeeEmployeeServlet extends HttpServlet {//might need to handle
 				data.setZipCode(rs.getString(8));
 				list.add(data);
 			}
-			request.setAttribute("EmployeeClientTable", list);
+			request.setAttribute("EmployeeEmployeeTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
