@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Manage Employees</title>
+		<title>Manage Customer</title>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	</head>
 	<body>
@@ -10,8 +10,9 @@
 				<th>Name</th>
 				<th>ID</th>
 				<th>SSN</th>
-				<th>StartDate</th>
-				<th>HourlyRate</th>
+				<th>Email</th>
+				<th>CreditCard</th>
+				<th>Rating</th>
 				<th>Address</th>
 				<th>ZipCode</th>
 				<th>Telephone</th>
@@ -20,7 +21,9 @@
 				<td>${item.id}</td>
 				<td>${item.ssn}</td>
 				<td>${item.startDate}</td>
-				<td>${item.hourlyRate}</td>
+				<td>${item.email}</td>
+				<td>${item.creditCard}</td>
+				<td>${item.rating}</td>
 				<td>${item.address}</td>
 				<td>${item.zipCode}</td>
 				<td>${item.telephone}</td>
