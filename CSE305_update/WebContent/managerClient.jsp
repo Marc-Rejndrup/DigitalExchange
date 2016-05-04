@@ -37,13 +37,11 @@
 	<footer>
 	</footer>
 	<script>
-	$(function(){
 		$.ajax({
 			type: "POST",
 			url: "managerClient",
 			context: document.body
 		});
-	});
 	
 
 	</script>

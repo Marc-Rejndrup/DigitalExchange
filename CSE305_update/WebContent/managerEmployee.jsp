@@ -37,12 +37,10 @@
 	<footer>
 	</footer>
 	<script>
-	$(function(){
 		$.ajax({
 			type: "POST",
 			url: "managerEmployee",
 			context: document.body
 		});
-	});
 	</script>
 </html>

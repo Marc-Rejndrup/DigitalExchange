@@ -23,6 +23,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 		String mysPassword = "1234";
 		//get Parameters
 		//String x = request.getParameter("y");
+		String x = request.getParameter("getby");
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
@@ -33,21 +34,53 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//make query
+			
+			rs = stmt1.executeQuery("select O.Symbol, sum(O.FilledPrice * O.NumShares) AS Revenue "
+						+ "from Orders as O "
+						+ "where O.OrderType='sell' "
+						+ "group by O.Symbol;");
+			List<DataTypeRevenue> list = new ArrayList<DataTypeRevenue>();
+			DataTypeRevenue data;
+			while(rs.next()){
+				data = new DataTypeRevenue();
+				data.setSymbol(rs.getString(1));
+				data.setRevenue(rs.getString(2));
+				list.add(data);
+			}
+			request.getSession().setAttribute("ManagerSymbolRevenueTable", list);
+			
 			rs = stmt1.executeQuery("select O.AccNum, sum(O.FilledPrice * O.NumShares) AS Revenue "
 					+ "from Orders as O "
 					+ "where O.OrderType='sell' "
 					+ "group by O.AccNum;");
-			//type the list.
-			List<DataTypeRevenue> list = new ArrayList<DataTypeRevenue>();
+			list = new ArrayList<DataTypeRevenue>();
 			while(rs.next()){
-				DataTypeRevenue data = new DataTypeRevenue();
-				System.out.println("AccNum: " + rs.getString(1));
+				data = new DataTypeRevenue();
 				data.setAccNum(rs.getString(1));
 				data.setRevenue(rs.getString(2));
 				list.add(data);
 			}
-			request.getSession().setAttribute("ManagerRevenueTable", list);
+			request.getSession().setAttribute("ManagerAccountRevenueTable", list);
+			
+			rs = stmt1.executeQuery("select S.type, sum(Rev.Revenue) as Revenue "
+					+ "from (select s.symbol, s.type from stock s inner join ( "
+					+ "select symbol, max(date) as md from stock group by symbol "
+					+ ") ss on s.symbol = ss.symbol and s.date = ss.md) as S "
+					+ "left outer join (select O.symbol as symbol, sum(O.FilledPrice * O.NumShares) AS Revenue "
+					+ "from Orders as O "
+					+ "where O.OrderType='sell' "
+					+ "GROUP BY symbol) as Rev "
+					+ "on Rev.symbol=S.symbol "
+					+ "GROUP by S.type; ");
+			list = new ArrayList<DataTypeRevenue>();
+			while(rs.next()){
+				data = new DataTypeRevenue();
+				data.setType(rs.getString(1));
+				data.setRevenue(rs.getString(2));
+				list.add(data);
+			}
+			request.getSession().setAttribute("ManagerTypeRevenueTable", list);
+			
 			rs.close();
 			conn.close();
 		}catch(Exception e){

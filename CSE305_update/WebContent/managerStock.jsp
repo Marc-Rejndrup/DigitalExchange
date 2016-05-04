@@ -29,13 +29,11 @@
 	<footer>
 	</footer>
 	<script>
-	$(function(){
 		$.ajax({
 			type: "POST",
 			url: "managerStock",
 			context: document.body
 		});
-	});
 	
 
 	</script>
