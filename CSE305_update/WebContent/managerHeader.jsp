@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="managerFooter">
 	<a href="managerEmployee.jsp">Employee</a>
 	<a href="managerRevenue.jsp">Revenue</a>

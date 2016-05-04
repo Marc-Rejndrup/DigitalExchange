@@ -2,7 +2,6 @@
 <html lang="en">
 	<head>
 		<title>Manage Customer</title>
-		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<%@include file="managerHeader.jsp"%>
 	</head>
 	<body>
