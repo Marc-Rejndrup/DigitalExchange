@@ -1,6 +1,6 @@
 package dataType;
 
-public class DataTypePerson {
+public class DataTypePerson implements java.io.Serializable{
 	private String ssn;
 	private String zipCode;
 	private String fullName;

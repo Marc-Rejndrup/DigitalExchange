@@ -1,93 +1,82 @@
 CREATE TABLE Person (
-SSN INTEGER,
-Name CHAR(20) NOT NULL,
-Address CHAR(20),
-ZipCode INTEGER,
-Telephone INTEGER,
-PRIMARY KEY (SSN));
+Name			CHAR(20),
+Address		CHAR(50),
+ZipCode		INTEGER(5),
+Telephone		CHAR(11),
+SSN			INTEGER(9),
+PRIMARY KEY(SSN)
+);
+
+CREATE TABLE Client(
+Email			CHAR(50),
+CustNum		INTEGER(9),
+CreditCard		CHAR(16) ,
+Rating			INTEGER(3) DEFAULT 0,
+SSN			INTEGER(9),
+PRIMARY KEY(CustNum),
+FOREIGN KEY(SSN) REFERENCES Person(SSN)
+);
 
 
-CREATE TABLE Employee (
-ID INTEGER,
-SSN INTEGER,
-StartDate DATE,
-HourlyRate INTEGER,
-PRIMARY KEY (ID),
-FOREIGN KEY (SSN) REFERENCES Person (SSN)
-ON DELETE NO ACTION
-ON UPDATE CASCADE );
 
-CREATE TABLE Account (
-Id INTEGER,
-DateOpened DATE,
-Client INTEGER,
-PRIMARY KEY (Id),
-FOREIGN KEY (Client) REFERENCES Client (Id)
-ON DELETE NO ACTION
-ON UPDATE CASCADE );
+CREATE TABLE Employee(
+HourlyRate		DECIMAL(9,2),
+StartDate		DATE,
+SSN			INTEGER(9),
+EmployeeId		INTEGER(9),
+Manager		BOOLEAN DEFAULT FALSE,
+PRIMARY KEY (EmployeeId),
+FOREIGN KEY (SSN) REFERENCES Person(SSN)
+);
 
-CREATE TABLE Client (
-Email CHAR(32),
-Rating INTEGER,
-CreditCardNumber INTEGER,
-Id INTEGER,
-PRIMARY KEY (Id),
-FOREIGN KEY (Id) REFERENCES Person (SSN)
-ON DELETE NO ACTION
-ON UPDATE CASCADE );
-
-CREATE TABLE Transaction (
-Id INTEGER,
-Fee DOUBLE,
-DateTime DATETIME,
-PricePerShare DOUBLE,
-PRIMARY KEY (Id) );
-
-CREATE TABLE Orders (
-NumShares INTEGER,
-PricePerShare DOUBLE,
-Id INTEGER,
-DateTime DATETIME,
-Percentage DOUBLE,
-Price CHAR(20),
-OrderType CHAR(5),
-AccountId INTEGER,
-Stock CHAR(20),
-PRIMARY KEY (Id) );
+CREATE TABLE Account(
+AccNum 		INTEGER(9),
+CustNum 		INTEGER(9),
+EmpNum		INTEGER(9),
+CreateDate		DATE,
+PRIMARY KEY (AccNum),
+FOREIGN KEY (CustNum) REFERENCES Client(CustNum),
+FOREIGN KEY (EmpNum) REFERENCES Employee(EmployeeId),
+CHECK( (CustNum IS NULL AND EmpNum IS NOT NULL) OR 
+(CustNum IS NOT NULL AND EmpNum IS NULL))
+);
 
 CREATE TABLE Stock (
-StockSymbol CHAR(20) NOT NULL,
-CompanyName CHAR(20) NOT NULL,
-Type CHAR(20) NOT NULL,
-PricePerShare DOUBLE,
-NumShares INTEGER,
-PRIMARY KEY (StockSymbol) );
-
-CREATE TABLE Trade (
-AccountId INTEGER,
-BrokerId INTEGER,
-TransactionId INTEGER,
-OrderId INTEGER,
-StockId CHAR(20),
-PRIMARY KEY (AccountId, BrokerId, TransactionId, OrderId, StockId),
-FOREIGN KEY (AccountID) REFERENCES Account (Id)
-ON DELETE NO ACTION
-ON UPDATE CASCADE,
-FOREIGN KEY (BrokerId) REFERENCES Employee (Id)
-ON DELETE NO ACTION
-ON UPDATE CASCADE,
-FOREIGN KEY (TransactionID) REFERENCES Transaction (Id)
-ON DELETE NO ACTION
-ON UPDATE CASCADE,
-FOREIGN KEY (OrderId) REFERENCES Orders (Id)
-ON DELETE NO ACTION
-ON UPDATE CASCADE,
-FOREIGN KEY (StockId) REFERENCES Stock (StockSymbol)
-ON DELETE NO ACTION
-ON UPDATE CASCADE );
+Symbol		CHAR(5),
+Name			CHAR(50) NOT NULL,
+Type			CHAR(20) NOT NULL,
+Date			DATE,
+Price			DECIMAL(10,2) DEFAULT 0.00,
+PRIMARY KEY (Symbol, Date)
+);
 
 CREATE TABLE Holding(
-	StockSymbol CHAR(20),
-    Amount INTEGER,
-    AccountId INTEGER);
+AccNum 		INTEGER(9),
+Symbol 		CHAR(5),
+Quantity 		INTEGER(9) NOT NULL,
+PRIMARY KEY(AccNum, Symbol),
+FOREIGN KEY (AccNum) REFERENCES Account (AccNum),
+FOREIGN KEY (Symbol) REFERENCES Stock(Symbol)
+);
 
+
+
+CREATE TABLE Orders (
+AccNum		INTEGER(9) NOT NULL, 
+OrderId		INTEGER(9),
+OrderType		CHAR(4) NOT NULL,
+NumShares		INTEGER(16) NOT NULL,
+Date 			DATE,
+Fee 			DECIMAL(8,2),
+Symbol		CHAR(5),
+Price 			DECIMAL(11,2),
+Percent 		DECIMAL(7,4),
+FilledPrice		DECIMAL(11,2),
+PriceType		CHAR(1),
+PRIMARY KEY (OrderId),
+FOREIGN KEY (AccNum) REFERENCES Account(AccNum),
+FOREIGN KEY (Symbol) REFERENCES Stock(Symbol),
+CHECK((Price IS NULL AND NOT Percent IS NULL) OR (NOT Price IS NULL AND Percent IS NULL) OR (Price IS NULL AND Percent IS NULL)),
+CHECK (PriceType ( VALUE IN (‘M’, ‘C’, ‘T’, ‘H’ ) ) ),
+CHECK (OrderType ( VALUE IN (“buy”, “sell”) ) )
+);

@@ -1,4 +1,4 @@
-package servlets;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
 
-public class ClientHistoryServlet extends HttpServlet {//might need to handle doGet.
+public class SuggestedStockServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 		String loginID = ""+session.getAttribute("login");
@@ -21,11 +21,9 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 		String mysUserID = "root"; 
 		String mysPassword = "1234";
 		//get Parameters
-		String sym = request.getParameter("stockSym");
-		String order = request.getParameter("order");
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
-
+		String id = request.getParameter("clientID");
+		if(id == null)
+			id = accountID;
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
@@ -36,13 +34,12 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//query the order if there is one, then the stock.
 			//make query
 			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
 			//type the list.
 			//List<x> list = new ArrayList<x>();
 			while(rs.next()){
-				//build info for the graph, possibly with arrayList? sort by increasing date.
+				//build list
 			}
 			//request.setAttribute("TableNAME", list);
 			rs.close();

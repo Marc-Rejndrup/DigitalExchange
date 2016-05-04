@@ -1,6 +1,6 @@
 package dataType;
 
-public class DataTypeHolding {
+public class DataTypeHolding implements java.io.Serializable{
 	private String stockSymbol;
 	private String amount;
 	private String accountId;

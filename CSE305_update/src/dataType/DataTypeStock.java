@@ -1,6 +1,6 @@
 package dataType;
 
-public class DataTypeStock {
+public class DataTypeStock implements java.io.Serializable{
 	private String symbol;
 	private String name;
 	private String type;

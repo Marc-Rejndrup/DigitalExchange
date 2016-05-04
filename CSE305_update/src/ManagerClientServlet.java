@@ -1,4 +1,4 @@
-package servlets;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
 
-public class ClientOrderServlet extends HttpServlet {//might need to handle doGet.
+public class ManagerClientServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 		String loginID = ""+session.getAttribute("login");
@@ -21,7 +21,7 @@ public class ClientOrderServlet extends HttpServlet {//might need to handle doGe
 		String mysUserID = "root"; 
 		String mysPassword = "1234";
 		//get Parameters
-		//String x = request.getParameter("x");
+		//String x = request.getParameter("y");
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
