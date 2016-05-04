@@ -3,7 +3,6 @@ package dataType;
 public class DataTypeEmployee extends DataTypePerson{
 	private String hourlyRate;
 	private String startDate;
-	private String ssn;
 	private String employeeId;
 	private String manager;
 	public String getHourlyRate() {
@@ -17,12 +16,6 @@ public class DataTypeEmployee extends DataTypePerson{
 	}
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
-	}
-	public String getSsn() {
-		return ssn;
-	}
-	public void setSsn(String ssn) {
-		this.ssn = ssn;
 	}
 	public String getEmployeeId() {
 		return employeeId;

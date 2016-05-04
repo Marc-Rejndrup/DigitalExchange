@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +37,8 @@ public class ManagerEmployeeServlet extends HttpServlet {//might need to handle 
 				data.setSsn(rs.getString(1));
 				data.setName(rs.getString(2));
 				data.setEmployeeId(rs.getString(3));
-				data.setManager.getString(4));
-				data.setHourlyRate.getString(5));
+				data.setManager(rs.getString(4));
+				data.setHourlyRate(rs.getString(5));
 				data.setStartDate(rs.getString(6));
 				data.setTelephone(rs.getString(7));
 				data.setAddress(rs.getString(8));

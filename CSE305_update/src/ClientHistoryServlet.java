@@ -42,11 +42,11 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 			o.setNumShares(rs.getString(2));
 			o.setDateTime(rs.getString(3));
 			o.setFee(rs.getString(4));
-			o.setSymbol(rs.getString(5));
-			o.setPrice(rs.getString(6));
+			o.setStock(rs.getString(5));
+			o.setPricePerShare(rs.getString(6));
 			o.setPercentage(rs.getString(7));
-			o.setFilledPrice(rs.getString(8));
-			rs = stmt1.executeQuery("SELECT Date, MarketPrice FROM Stock WHERE symbol = "+ o.getSymbol());
+			o.setPrice(rs.getString(8));
+			rs = stmt1.executeQuery("SELECT Date, MarketPrice FROM Stock WHERE symbol = "+ o.getStock());
 			List<DataTypeStock> list = new ArrayList<DataTypeStock>();
 			while(rs.next()){
 				DataTypeStock data = new DataTypeStock();

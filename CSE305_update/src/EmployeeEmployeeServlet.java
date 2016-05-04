@@ -37,7 +37,7 @@ public class EmployeeEmployeeServlet extends HttpServlet {//might need to handle
 				data.setSsn(rs.getString(1));
 				data.setName(rs.getString(2));
 				data.setEmployeeId(rs.getString(3));
-				data.setManager.getString(4));
+				data.setManager(rs.getString(4));
 				data.setStartDate(rs.getString(5));
 				data.setTelephone(rs.getString(6));
 				data.setAddress(rs.getString(7));
