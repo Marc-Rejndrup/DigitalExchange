@@ -1,18 +1,18 @@
 manager tables							?	
 employee (e)							?
+revenue (for stock, stocktype, cust)	Done
 
-revenue (for stock, stocktype, cust)	Done (to be checked)
-											O.Symbol, O.CompPrice (Order O) should be invalid references, but for now I just copied the query verbatim from HW2 doc
-											I probably should have used DataTypeOrder instead of DataTypeStock, but there's confusion over where to put particular values (revenue,symbol,accnum)
-											
+									
 stock(+, edit price)
 order
 customer (with delete)
 
-employee tables
-order (add)
-customer (edit, maillist_checklist)
-employee (-hourly rate)
+
+Wei:
+	employee tables							
+	order (add)								? There's a createOrderServlet already that's linked to facultyInformation.jsp
+	customer (edit, maillist_checklist)		
+	employee (-hourly rate)					Done, to be checked
 
 Client
 Stock ()

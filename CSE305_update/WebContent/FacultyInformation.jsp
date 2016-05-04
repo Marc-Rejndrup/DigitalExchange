@@ -126,14 +126,19 @@ response.setDateHeader("Expires",0);
                     
                     Record Order - given the following, create an order
                     <form action="createorder" method="post">
-                    	Order Id: <input type=text name="nooid" /><br/>
-                    	Client Id: <input type=text name="nocid" /><br/>
-                    	Stock: <input type=text name="nostock" /><br/>
-                    	NumShares: <input type=text name="nonumshares" /><br/>
-                    	PricePerShare: <input type=text name="nopps" /><br/>
-                    	Price Type: <input type=text name="nopricetype" /><br/>
-                    	Percentage: <input type=text name="nopercentage" /><br/>
-                    	Order Type: <input id="Radio1" name="group1" checked="checked" type="radio" />Buy  &nbsp; &nbsp;<input id="Radio2" name="group1" type="radio" />Sell<br/>
+                    	Account Number: <input type=text name="accNum"/><br />
+                    	Order Id: <input type=text name="orderID" /><br/>
+                    	Order Type: <input id="Radio1" name="orderType" checked="B" type="radio" />Buy  &nbsp; &nbsp;  <input id="Radio2" name="orderType" checked="S" type="radio" />Sell<br/>
+                    	NumShares: <input type=text name="numShares" /><br/>
+                    	DateTrans: <input type=text name="dateTrans" /><br/>
+                    	Fee: <input type=text name="fee" /> <br />
+                    	Price Type: <input type=text name="priceType" /><br/>
+                    	Price: <input type=text name="price" /><br/>
+                    	Percentage: <input type=text name="percent" /><br/>
+                    	Stock: <input type=text name="stockSymbol" /><br/>
+                    	Filled: <input id="Radio1" name="filled" checked="True" type="radio" />True  &nbsp; &nbsp;<input id="Radio2" name="filled" checked="False" type="radio" />False<br/>
+                    	EmployeeNumber: <input id="text" name="employeeNumber" /></br/>
+                    	
                     	<input id="Button4" type="submit" />
                     </form><br/>
                     

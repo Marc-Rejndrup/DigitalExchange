@@ -16,15 +16,18 @@ public class CreateOrderServlet extends HttpServlet{
 		  
 		          String stuId = ""+session.getValue("login");
 		          
-		  		String nooid = request.getParameter("nooid");
-				String nocid = request.getParameter("nocid");
-		  		String nostock = request.getParameter("nostock");
-		  		String nonumshares = request.getParameter("nonumshares");
-		  		String nopps = request.getParameter("nopps");
-		  		//String nodatetime = request.getParameter("nodatetime");
-		  		String nopricetype = request.getParameter("nopricetype");
-		  		String nopercentage = request.getParameter("nopercentage");
-		  		String noordertype = request.getParameter("group1");
+		  		String accNum = request.getParameter("accNum");
+				String orderID = request.getParameter("orderID");
+		  		String orderType = request.getParameter("orderType");
+		  		String numShares = request.getParameter("numShares");
+		  		String dateTrans = request.getParameter("dateTrans");
+		  		String fee = request.getParameter("fee");
+		  		String priceType = request.getParameter("priceType");
+		  		String price = request.getParameter("price");
+		  		String percent = request.getParameter("percent");
+		  		String stockSymbol = request.getParameter("stockSymbol");
+		  		String booleanFilled = request.getParameter("booleanFilled");
+		  		String employeeNumber = request.getParameter("employeeNumber");
 
 		     	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 		     	String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
@@ -48,8 +51,9 @@ public class CreateOrderServlet extends HttpServlet{
 		            
 		            			java.sql.Statement stmt1=conn.createStatement();
 									stmt1.executeUpdate("insert into Orders VALUES"
-											+ "('"+nonumshares+"', '"+nopps+"', '"+nooid+"', '"+d2+"', '"+nopercentage+"', "
-													+ "'"+nopricetype+"', '"+noordertype+"', '"+nocid+"', '"+nostock+"')");
+											+ "('"+accNum+"', '"+orderID+"', '"+orderType+"', '"+numShares+"', '"+dateTrans+"', "
+													+ "'"+fee+"', '"+priceType+"', '"+price+"', '"+percent+"', '"+stockSymbol
+													+"', '"+booleanFilled+"', '"+employeeNumber+"')");
 					} catch(Exception e)
 					{
 						e.printStackTrace();
