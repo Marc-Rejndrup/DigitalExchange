@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/*
+ * Servlet to EDIT AND DELETE an employee, his accounts, and his person
+ */
 public class EditEmployeeServlet extends HttpServlet{
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
@@ -18,6 +20,7 @@ public class EditEmployeeServlet extends HttpServlet{
 		          
 
 		  		String ssn = request.getParameter("act");
+		  		String delete = request.getParameter("delete");
 				String name = request.getParameter("name" + ssn);
 				String address = request.getParameter("address" + ssn);
 				String zipcode = request.getParameter("zipCode" + ssn);
@@ -43,12 +46,28 @@ public class EditEmployeeServlet extends HttpServlet{
 		            			conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
 		            			System.out.println("Connected successfully to database using JConnect");
 		            
-		            			java.sql.Statement stmt1=conn.createStatement();
+	            				java.sql.Statement stmt1=conn.createStatement();
+
+		            			if(ssn != null){
 		            				stmt1.executeUpdate("update Person set Name='"+name+"' where ssn='"+ssn+"'");
 		            				stmt1.executeUpdate("update Person set Address='"+address+"' where ssn='"+ssn+"'");
 		            				stmt1.executeUpdate("update Person set Zipcode='"+zipcode+"' where ssn='"+ssn+"'");
 		            				stmt1.executeUpdate("update Person set Telephone='"+telephone+"' where ssn='"+ssn+"'");
 		            				stmt1.executeUpdate("update Employee set HourlyRate='"+hourlyrate+"' where ssn='"+ssn+"'");
+		            			}
+		            			else{
+		            				java.sql.ResultSet rs = stmt1.executeQuery("select AccNum from Account where EmpNum='"+ssn+"'");
+		            				while(rs.next()){
+		            					String accNum = rs.getString(1);
+		            					stmt1.executeUpdate("delete from orders where AccNum='"+accNum+"'");
+		            				}
+		            				stmt1.executeUpdate("delete from account where empNum='"+delete+"'");
+		            				stmt1.executeUpdate("delete from employee where ssn='"+delete+"'");
+		            				stmt1.executeUpdate("delete from person where ssn='"+delete+"'");
+		            				System.out.println("All traces of employee " + delete + " have been removed!");
+		            				rs.close();
+		            			}
+		            				
 		            			
 					} catch(Exception e)
 					{

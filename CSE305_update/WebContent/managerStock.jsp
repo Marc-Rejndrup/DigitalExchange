@@ -5,6 +5,7 @@
 		<%@include file="managerHeader.jsp"%>
 </head>
 	<body>
+	<div id='stockDiv'>
 		<table>
 			<tr>
 				<th>Symbol</th>
@@ -23,6 +24,25 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
+		<div id='countDiv' class='hidden-div'>
+		<table>
+			<tr>
+				<th>Symbol</th>
+				<th>Times Traded</th>
+			</tr>
+			<c:forEach var="item" items="${sessionScope.ManagerStockCountTable}" >
+			<tr>
+				<td>${item.stock}</td>
+				<td>${item.count}</td>
+				</tr>
+			</c:forEach>
+		</table>
+		</div>
+		
+		<button id="buttonStock">Current Stock Prices</button>
+		<button id="buttonCount">Most Actively Traded Stock</button>
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 	</body>
 		
@@ -35,6 +55,18 @@
 			context: document.body
 		});
 	
-
+		var buttonStock = document.getElementById('buttonStock');
+		var buttonCount = document.getElementById('buttonCount');
+		
+		buttonStock.onclick = function(){
+			document.getElementById('stockDiv').style.display = 'block';
+			document.getElementById('countDiv').style.display = 'none';
+		}
+		
+		buttonCount.onclick = function(){
+			document.getElementById('stockDiv').style.display = 'none';
+			document.getElementById('countDiv').style.display = 'block';
+		}
+		
 	</script>
 </html>
