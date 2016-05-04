@@ -6,6 +6,8 @@ public class DataTypePerson implements java.io.Serializable{
 	private String name;
 	private String address;
 	private String telephone;
+
+	//github.com/Marc-Rejndrup/DigitalExchange.git
 	public String getSsn() {
 		return ssn;
 	}

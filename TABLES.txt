@@ -17,8 +17,6 @@ PRIMARY KEY(CustNum),
 FOREIGN KEY(SSN) REFERENCES Person(SSN)
 );
 
-
-
 CREATE TABLE Employee(
 HourlyRate		DECIMAL(9,2),
 StartDate		DATE,
