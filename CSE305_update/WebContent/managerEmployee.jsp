@@ -3,6 +3,8 @@
 	<head>
 		<title>Manage Employees</title>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+		<%@include file="managerHeader.jsp"%>
 	</head>
 	<body>
 		<table>
@@ -35,7 +37,6 @@
 	</body>
 		
 	<footer>
-		<%@include file="managerFooter.jsp"%>
 	</footer>
 	<script>
 	$(function(){

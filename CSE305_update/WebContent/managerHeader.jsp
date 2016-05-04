@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 <div id="managerFooter">
 	<a href="managerEmployee.jsp">Employee</a>
 	<a href="managerRevenue.jsp">Revenue</a>
