@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import dataType.DataTypeHolding;
+
+import dataType.DataTypeOrder;
+import dataType.DataTypeStock;
 
 public class ClientHistoryServlet extends HttpServlet {//might need to handle doGet.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,10 +23,7 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 		String mysUserID = "root"; 
 		String mysPassword = "1234";
 		//get Parameters
-		String sym = request.getParameter("stockSym");
-		String order = request.getParameter("order");
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
+		String orderId = request.getParameter("OrderId");
 
 		java.sql.Connection conn = null;
 		try {
@@ -36,15 +35,27 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			//query the order if there is one, then the stock.
-			//make query
-			rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);//change this!
-			//type the list.
-			//List<x> list = new ArrayList<x>();
+			//get the relevant order.
+			rs = stmt1.executeQuery("SELECT OrderType, NumShares, Date, Fee, Symbol, Price, Percent, FilledPrice FROM Order WHERE OrderId = "+ orderId);
+			DataTypeOrder o = new DataTypeOrder();
+			o.setOrderType(rs.getString(1));
+			o.setNumShares(rs.getString(2));
+			o.setDateTime(rs.getString(3));
+			o.setFee(rs.getString(4));
+			o.setSymbol(rs.getString(5));
+			o.setPrice(rs.getString(6));
+			o.setPercentage(rs.getString(7));
+			o.setFilledPrice(rs.getString(8));
+			rs = stmt1.executeQuery("SELECT Date, MarketPrice FROM Stock WHERE symbol = "+ o.getSymbol());
+			List<DataTypeStock> list = new ArrayList<DataTypeStock>();
 			while(rs.next()){
-				//build info for the graph, possibly with arrayList? sort by increasing date.
+				DataTypeStock data = new DataTypeStock();
+				data.setDate(rs.getString(1));
+				data.setPrice(rs.getString(2));
+				list.add(data);
 			}
-			//request.setAttribute("TableNAME", list);
+			request.setAttribute("ClientHistoryTable", list);
+			request.setAttribute("Order", o);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
@@ -52,7 +63,7 @@ public class ClientHistoryServlet extends HttpServlet {//might need to handle do
 		}finally{
 			try{conn.close();}catch(Exception ee){};
 		}
-		RequestDispatcher view = request.getRequestDispatcher("clientHolding.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("clientHistory.jsp");
 		view.forward(request, response);    
 	}
 }
