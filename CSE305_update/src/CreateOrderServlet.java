@@ -69,17 +69,25 @@ public class CreateOrderServlet extends HttpServlet{
 															+ "'"+fee+"', '"+stockSymbol+"', NULL, '"+percent+"', "
 																	+ "NULL, '"+priceType+"')");
 		        					}
-			        				else
+			        				else{
 										stmt1.executeUpdate("insert into Orders VALUES"
 												+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
 														+ "'"+fee+"', '"+stockSymbol+"', NULL, NULL, "
 																+ "'"+filledPrice+"', '"+priceType+"')");
+										stmt1.executeUpdate("update holding set quantity=quantity-"+numShares+" where AccNum='"+accNum+"' and Symbol='"+stockSymbol+"'");
+			        				}
 		        				}
-		        				else
+		        				else{
 									stmt1.executeUpdate("insert into Orders VALUES"
 											+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
 													+ "'"+fee+"', '"+stockSymbol+"', NULL, NULL, "
 															+ "'"+filledPrice+"', '"+priceType+"')");
+									rs = stmt1.executeQuery("select * from holding where AccNum='"+accNum+"' and Symbol='"+stockSymbol+"'");
+									if(!rs.next())
+										stmt1.executeUpdate("insert into holding values ('"+accNum+"', '"+stockSymbol+"', "+numShares+")");
+									else
+										stmt1.executeUpdate("update holding set quantity=quantity-"+numShares+" where AccNum='"+accNum+"' and Symbol='"+stockSymbol+"'");
+		        				}
 					} catch(Exception e)
 					{
 						e.printStackTrace();
