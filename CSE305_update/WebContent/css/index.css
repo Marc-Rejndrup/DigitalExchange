@@ -1,0 +1,11 @@
+.centered {
+	text-align: center;
+}
+
+input {
+	background-color: gainsboro;
+}
+
+div {
+	padding: 15px;
+}

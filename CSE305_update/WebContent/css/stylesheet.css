@@ -5,3 +5,7 @@ table, th, td {
 .hidden-div{
 	display: none;
 }
+
+input{
+	background-color: gainsboro;
+}
