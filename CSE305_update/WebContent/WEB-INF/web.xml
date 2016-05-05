@@ -112,6 +112,14 @@
 		<servlet-name>managerOrder</servlet-name>
 		<url-pattern>/managerOrder</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>employeeEmployee</servlet-name>
+		<servlet-class>EmployeeEmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>employeeEmployee</servlet-name>
+		<url-pattern>/employeeEmployee</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>other.LoginFilter</filter-class>
