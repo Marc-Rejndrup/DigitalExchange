@@ -28,8 +28,8 @@
                     	<input name="priceType" value='C' type="radio" />Market on Close
                     	<input name="priceType" value='T' type="radio" />Trailing Stop
                     	<input name="priceType" value='H' type="radio" />Hidden Stop<br />
-                    	Price: <input type=text name="price" /><br/>
-                    	Percentage: <input type=text name="percent" /><br/>
+                    	Stop Price: <input type=text name="price" /><br/>
+                    	Stop Percentage: <input type=text name="percent" /><br/>
                     	Filled Price: <input type=text name="filledPrice" /><br/>
                     	<input id="Button4" type="submit" />
 		</form>

@@ -6,38 +6,41 @@
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	</head>
 	<body>
-		<h1>Your Orders:</h1>
-		<div class="center"><table>
-			<tr>
-				<th>ID</th>
-				<th>Stock</th>
-				<th>Buy or Sell</th>
-				<th>Quantity</th>
-				<th>Time</th>
-				<th>Type</th>
-				<th>Trailing</th>
-				<th>Completed At</th>
-			</tr>
-			<c:forEach var="item" items="${sessionScope.ClientOrderTable}" >
+		<h1>Orders Lookup:</h1>
+		<div>
+			<form action="clientOrder" method="post">
+                    	<div>Account ID: <input type=text name="custNum" /></div>
+                    	<input type="submit" />
+			</form>
+		</div>
+		<div class = "center">
+			<table>
 				<tr>
-					<td>${item.accountId }
-					<td>${item.stock}</td>
-					<td>${item.buySell}</td>
-					<td>${item.numShares}</td>
-					<td>${item.dateTime}</td>
-					<td>${item.orderType}</td>
-					<td>${empty item.percentage ? item.pricePerShare : item.percentage}</td>
-					<td>${empty item.price ? "Not completed." : item.price}</td>
+					<th>Order ID</th>
+					<th>Account Id</th>
+					<th>Stock</th>
+					<th>#</th>
+					<th>Order Type</th>
+					<th>Timestamp</th>
+					<th>Fee</th>
+					<th>Fulfilled Price</th>
 				</tr>
-			</c:forEach>
-		</table></div>
+				<c:forEach var="item" items="${sessionScope.ClientOrderTable}">
+					<tr>
+						<td>${item.id}</td>
+						<td>${item.accountId}</td>
+						<td>${item.stock}</td>
+						<td>${item.numShares}</td>
+						<td>${item.buySell}</td>
+						<td>${item.dateTime}</td>
+						<td>${item.fee}</td>
+						<td>${item.price}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 		<script>
-		$.ajax({
-			type: "POST",
-			url: "clientOrder",
-			context: document.body
-		});
 		
 	</script>
 	</body>

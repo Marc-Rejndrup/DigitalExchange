@@ -26,9 +26,9 @@
 					<th>Price Type</th>
 					<th>Timestamp</th>
 					<th>Fee</th>
-					<th>Percentage</th>
-					<th>PPS</th>
-					<th>Price</th>
+					<th>Stop Percentage</th>
+					<th>Stop Price</th>
+					<th>Fulfilled Price</th>
 				</tr>
 				<c:forEach var="item" items="${sessionScope.ManagerOrderTable}">
 					<tr>

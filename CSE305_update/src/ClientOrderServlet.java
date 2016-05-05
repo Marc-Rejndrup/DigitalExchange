@@ -21,7 +21,11 @@ public class ClientOrderServlet extends HttpServlet {//might need to handle doGe
 		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
 		String mysUserID = "root"; 
 		String mysPassword = "1234";
-		System.out.println("THIS WAS REACHED");
+
+		String accNum = request.getParameter("custNum");
+		
+		System.out.println("REACHED, custnum = " + accNum);
+		
 		java.sql.Connection conn = null;
 		try {
 			Class.forName(mysJDBCDriver).newInstance();
@@ -32,7 +36,7 @@ public class ClientOrderServlet extends HttpServlet {//might need to handle doGe
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			rs = stmt1.executeQuery("SELECT * FROM orders WHERE AccNum = " + loginID);
+			rs = stmt1.executeQuery("SELECT * FROM orders WHERE AccNum = '"+accNum+"'");
 			List<DataTypeOrder> list = new ArrayList<DataTypeOrder>();
 			while(rs.next()){
 				DataTypeOrder data = new DataTypeOrder();
