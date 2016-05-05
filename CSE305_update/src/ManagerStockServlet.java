@@ -42,9 +42,34 @@ public class ManagerStockServlet extends HttpServlet {
 			rs.next();
 			String name = rs.getString(2);
 			String type = rs.getString(3);
-			System.out.println(newPrice);
+			System.out.println(newPrice + " is the new price for " + symbol);
+			rs.close();
 
 			stmt1.executeUpdate("insert into stock values ('"+symbol+"', '"+name+"', '"+type+"', NOW(), '"+newPrice+"')");
+			
+			// now we have to deal with conditional orders
+			
+			/*
+			 * HIDDEN STOPS
+			 * >check if stop price is greater than new price
+			 * >if sp>np then change order fulfilled price to the stop price and change holdings
+			 */
+			rs = stmt1.executeQuery("select * from orders as o where o.symbol='"+symbol+"' and o.priceType='H'");
+			List<String> listId = new ArrayList<String>();
+
+			while(rs.next()){
+				double np = Double.parseDouble(newPrice);
+				double sp = Double.parseDouble(rs.getString(8));
+				String orderId = rs.getString(2);
+				System.out.println(orderId);
+				if(sp > np){
+					listId.add(orderId);
+				}
+			}
+			
+			for(String id : listId){
+				stmt1.executeUpdate("update orders set FilledPrice=Price where OrderId="+id);
+			}
 			
 			conn.close();
 		}catch(Exception e){
