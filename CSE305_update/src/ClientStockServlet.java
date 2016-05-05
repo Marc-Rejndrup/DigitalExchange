@@ -31,6 +31,7 @@ public class ClientStockServlet extends HttpServlet {//might need to handle doGe
 		//String x = request.getParameter("x");
 		String symbol = request.getParameter("stockSymbol");
 		String type = request.getParameter("stockType");
+		String keyword = request.getParameter("keyword");
 		System.out.println("Symbol is " + symbol);
 		java.sql.Connection conn = null;
 		try {
@@ -95,8 +96,46 @@ public class ClientStockServlet extends HttpServlet {//might need to handle doGe
 					list2.add(data2);
 				}
 				request.getSession().setAttribute("ClientOrderTypeTable", list2);
+			}
+			
+			else if(keyword != null){
+				rs = stmt1.executeQuery("select * from stock s inner join ("
+						+ "select symbol, max(date) as md from stock group by symbol) "
+						+ "ss on s.symbol = ss.symbol and s.date = ss.md where s.name like '%"+keyword+"%'");				
+				List<DataTypeStock> list = new ArrayList<DataTypeStock>();
+				while(rs.next()){
+					DataTypeStock data = new DataTypeStock();
+					data.setSymbol(rs.getString(1));
+					data.setName(rs.getString(2));
+					data.setType(rs.getString(3));
+					data.setDate(rs.getString(4));
+					data.setPrice(rs.getString(5));
+					list.add(data);
+				}
+				request.getSession().setAttribute("ClientStockKeywordTable", list);
 				
-				
+				rs = stmt1.executeQuery("select * from orders as o "
+						+ "inner join (select s.symbol from stock s inner join "
+						+ "(select symbol, max(date) as md from stock group by symbol)"
+						+ " ss on s.symbol = ss.symbol and s.date = ss.md where s.name like '%"+keyword+"%') as stk "
+						+ "where o.symbol = stk.symbol and o.FilledPrice IS NOT NULL;");
+				List<DataTypeOrder> list3 = new ArrayList<DataTypeOrder>();
+				while(rs.next()){
+					DataTypeOrder data3 = new DataTypeOrder();
+					data3.setAccountId(rs.getString(1));
+					data3.setId(rs.getString(2));
+					data3.setBuySell(rs.getString(3));
+					data3.setNumShares(rs.getString(4));
+					data3.setDateTime(rs.getString(5));
+					data3.setFee(rs.getString(6));
+					data3.setStock(rs.getString(7));
+					data3.setPricePerShare(rs.getString(8));
+					data3.setPercentage(rs.getString(9));
+					data3.setPrice(rs.getString(10));
+					data3.setOrderType(rs.getString(11));
+					list3.add(data3);
+				}
+				request.getSession().setAttribute("ClientOrderKeywordTable", list3);
 			}
 			
 			conn.close();

@@ -85,6 +85,62 @@
 				</c:forEach>
 			</table>
 		</div>
+		
+		<div>
+			<form action="clientStock" method="get">
+                    	<div>Name Keyword: <input type=text name="keyword" /></div>
+                    	<input type="submit" />
+			</form>
+		</div>
+		
+		<div>
+		<table>
+			<tr>
+				<th>Symbol</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Price</th>
+				<th>Last Updated</th>
+			</tr>
+			<c:forEach var="item" items="${sessionScope.ClientStockKeywordTable}">
+				<tr>
+					<td>${item.symbol}</td>
+					<td>${item.name}</td>
+					<td>${item.type}</td>
+					<td>${item.price}</td>
+					<td>${item.date}</td>
+				</tr>
+			</c:forEach>
+		</table>
+		</div>
+		
+		<div>
+			<table>
+				<tr>
+					<th>Order ID</th>
+					<th>Account Id</th>
+					<th>Stock</th>
+					<th>#</th>
+					<th>Order Type</th>
+					<th>Timestamp</th>
+					<th>Fee</th>
+					<th>Fulfilled Price</th>
+				</tr>
+				<c:forEach var="item" items="${sessionScope.ClientOrderKeywordTable}">
+					<tr>
+						<td>${item.id}</td>
+						<td>${item.accountId}</td>
+						<td>${item.stock}</td>
+						<td>${item.numShares}</td>
+						<td>${item.buySell}</td>
+						<td>${item.dateTime}</td>
+						<td>${item.fee}</td>
+						<td>${item.price}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+		
 	</div>
 
 	<div id='countDiv' class='hidden-div'>
@@ -108,7 +164,6 @@
 
 	<button id="buttonStock">Stock History Lookup</button>
 	<button id="buttonCount">Best-Seller Stocks</button>
-	<button id="buttonType">Stocks and Orders By Type</button>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
