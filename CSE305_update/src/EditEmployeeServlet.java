@@ -56,16 +56,12 @@ public class EditEmployeeServlet extends HttpServlet{
 		            				stmt1.executeUpdate("update Employee set HourlyRate='"+hourlyrate+"' where ssn='"+ssn+"'");
 		            			}
 		            			else{
-		            				java.sql.ResultSet rs = stmt1.executeQuery("select AccNum from Account where EmpNum='"+ssn+"'");
-		            				while(rs.next()){
-		            					String accNum = rs.getString(1);
-		            					stmt1.executeUpdate("delete from orders where AccNum='"+accNum+"'");
-		            				}
+		            				/*
+		            				stmt1.executeUpdate("delete from orders where AccNum='"+delete+"'");
 		            				stmt1.executeUpdate("delete from account where empNum='"+delete+"'");
 		            				stmt1.executeUpdate("delete from employee where ssn='"+delete+"'");
 		            				stmt1.executeUpdate("delete from person where ssn='"+delete+"'");
-		            				System.out.println("All traces of employee " + delete + " have been removed!");
-		            				rs.close();
+		            				System.out.println("All traces of employee " + delete + " have been removed!");*/
 		            			}
 		            				
 		            			

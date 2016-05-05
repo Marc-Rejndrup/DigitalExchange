@@ -17,7 +17,7 @@
 				<th>Address</th>
 				<th>Zip Code</th>
 				<th>Edit</th>
-				<th>Delete</th>
+				<!-- <th>Delete</th> -->
 			</tr>
 			<c:forEach var="item" items="${sessionScope.ManagerEmployeeTable}">
 			<form action="editemployee" method="post">
@@ -31,7 +31,7 @@
 					<td><input name='address${item.ssn}' value='${item.address}' /></td>
 					<td><input name='zipCode${item.ssn}' value='${item.zipCode}' /></td>
 					<td><input type='submit' name='act' value='${item.ssn}' /></td>
-					<td><input type='submit' name='delete' value='${item.ssn}' /></td>
+					<!--  <td><input type='submit' name='delete' value='${item.ssn}' /></td> -->
 				</tr>
 			</form>
 			</c:forEach>

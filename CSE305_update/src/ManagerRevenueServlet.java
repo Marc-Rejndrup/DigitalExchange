@@ -38,7 +38,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 			rs = stmt1.executeQuery("select O.Symbol, sum(O.FilledPrice * O.NumShares) AS Revenue "
 						+ "from Orders as O "
 						+ "where O.OrderType='sell' "
-						+ "group by O.Symbol;");
+						+ "group by O.Symbol order by Revenue desc");
 			List<DataTypeRevenue> list = new ArrayList<DataTypeRevenue>();
 			DataTypeRevenue data;
 			while(rs.next()){
@@ -53,7 +53,7 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 			rs = stmt1.executeQuery("select O.AccNum, sum(O.FilledPrice * O.NumShares) AS Revenue "
 					+ "from Orders as O "
 					+ "where O.OrderType='sell' "
-					+ "group by O.AccNum;");
+					+ "group by O.AccNum order by Revenue desc");
 			list = new ArrayList<DataTypeRevenue>();
 			while(rs.next()){
 				data = new DataTypeRevenue();
@@ -73,7 +73,8 @@ public class ManagerRevenueServlet extends HttpServlet {//might need to handle d
 					+ "where O.OrderType='sell' "
 					+ "GROUP BY symbol) as Rev "
 					+ "on Rev.symbol=S.symbol "
-					+ "GROUP by S.type; ");
+					+ "GROUP by S.type "
+					+ "order by Revenue desc");
 			list = new ArrayList<DataTypeRevenue>();
 			while(rs.next()){
 				data = new DataTypeRevenue();

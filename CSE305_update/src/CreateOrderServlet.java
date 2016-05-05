@@ -24,7 +24,7 @@ public class CreateOrderServlet extends HttpServlet{
 		  		String price = request.getParameter("price");
 		  		String percent = request.getParameter("percent");
 		  		String stockSymbol = request.getParameter("stockSymbol");
-		  		String filledPrice = request.getParameter("filledPrice");
+		  		//String filledPrice = request.getParameter("filledPrice");
 
 		  		
 		     	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
@@ -56,17 +56,23 @@ public class CreateOrderServlet extends HttpServlet{
 		        				
 		        				rs.close();
 		        				
+		        				rs=stmt1.executeQuery("select Price from Stock as s where symbol='"+stockSymbol+"'");
+		        				
+		        				rs.next();
+		        				
+		        				String filledPrice = rs.getString(1);
+		        				
 		        				if(orderType.equals("sell")){
 		        					if(priceType.equals("T") || priceType.equals("H")){
 				        				if(percent.equals(""))
 											stmt1.executeUpdate("insert into Orders VALUES"
 													+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
-															+ "'"+fee+"', '"+stockSymbol+"', '"+price+"', NULL, "
+															+ "NULL, '"+stockSymbol+"', '"+price+"', NULL, "
 																	+ "NULL, '"+priceType+"')");
 				        				else
 											stmt1.executeUpdate("insert into Orders VALUES"
 													+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
-															+ "'"+fee+"', '"+stockSymbol+"', NULL, '"+percent+"', "
+															+ "NULL, '"+stockSymbol+"', NULL, '"+percent+"', "
 																	+ "NULL, '"+priceType+"')");
 		        					}
 			        				else{
