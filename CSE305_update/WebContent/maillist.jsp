@@ -4,6 +4,6 @@
 	${type} 
 </c:forEach>
 
-<form name="myForm" action="FacultyInformation.jsp" method="post">
+<form name="myForm" action="employeeClient.jsp" method="post">
 <input id="Button2" type="submit" value="Back" />
 </form>

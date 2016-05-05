@@ -38,7 +38,6 @@ public class GenerateEmailServlet extends HttpServlet{
             			
             			rs = stmt1.executeQuery("select Email from Client");
 
-
             			List<String> list = new ArrayList<String>();
             			
             			while(rs.next()){

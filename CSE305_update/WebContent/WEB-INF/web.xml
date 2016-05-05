@@ -128,6 +128,14 @@
 		<servlet-name>employeeClient</servlet-name>
 		<url-pattern>/employeeClient</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>generateemail</servlet-name>
+		<servlet-class>GenerateEmailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>generateemail</servlet-name>
+		<url-pattern>/generateemail</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>other.LoginFilter</filter-class>
