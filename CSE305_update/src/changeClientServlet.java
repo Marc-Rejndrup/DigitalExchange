@@ -49,7 +49,7 @@ public class changeClientServlet extends HttpServlet{
 		            			if(!name.equals(""))
 		            				stmt1.executeUpdate("update Person set Name='"+name+"' where ssn='"+ssn+"'");
 		            			if(!address.equals(""))
-		            				stmt1.executeUpdate("update Person set Zipcode='"+address+"' where ssn='"+ssn+"'");
+		            				stmt1.executeUpdate("update Person set Address='"+address+"' where ssn='"+ssn+"'");
 		            			if(!zipcode.equals(""))
 		            				stmt1.executeUpdate("update Person set Zipcode='"+zipcode+"' where ssn='"+ssn+"'");
 		            			if(!telephone.equals(""))
