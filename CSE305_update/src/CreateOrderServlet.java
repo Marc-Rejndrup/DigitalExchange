@@ -14,21 +14,19 @@ public class CreateOrderServlet extends HttpServlet{
 		  HttpSession session=request.getSession();  
 		  
 		  
-		          String stuId = ""+session.getValue("login");
+		        String stuId = ""+session.getValue("login");
 		          
 		  		String accNum = request.getParameter("accNum");
-				String orderID = request.getParameter("orderID");
 		  		String orderType = request.getParameter("orderType");
 		  		String numShares = request.getParameter("numShares");
-		  		String dateTrans = request.getParameter("dateTrans");
 		  		String fee = request.getParameter("fee");
 		  		String priceType = request.getParameter("priceType");
 		  		String price = request.getParameter("price");
 		  		String percent = request.getParameter("percent");
 		  		String stockSymbol = request.getParameter("stockSymbol");
-		  		String booleanFilled = request.getParameter("booleanFilled");
-		  		String employeeNumber = request.getParameter("employeeNumber");
+		  		String filledPrice = request.getParameter("filledPrice");
 
+		  		
 		     	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
 		     	String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
 		      	String mysUserID = "root"; 
@@ -50,10 +48,38 @@ public class CreateOrderServlet extends HttpServlet{
 		            			System.out.println("Connected successfully to database using JConnect");
 		            
 		            			java.sql.Statement stmt1=conn.createStatement();
+		            			
+		        				java.sql.ResultSet rs = stmt1.executeQuery("select coalesce(max(OrderId), 0) from Orders");
+		        				rs.next();
+		        								
+		        				int orderId = Integer.parseInt(rs.getString(1)) + 1;
+		        				
+		        				rs.close();
+		        				
+		        				if(orderType.equals("sell")){
+		        					if(priceType.equals("T") || priceType.equals("H")){
+				        				if(percent.equals(""))
+											stmt1.executeUpdate("insert into Orders VALUES"
+													+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
+															+ "'"+fee+"', '"+stockSymbol+"', '"+price+"', NULL, "
+																	+ "NULL, '"+priceType+"')");
+				        				else
+											stmt1.executeUpdate("insert into Orders VALUES"
+													+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
+															+ "'"+fee+"', '"+stockSymbol+"', NULL, '"+percent+"', "
+																	+ "NULL, '"+priceType+"')");
+		        					}
+			        				else
+										stmt1.executeUpdate("insert into Orders VALUES"
+												+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
+														+ "'"+fee+"', '"+stockSymbol+"', NULL, NULL, "
+																+ "'"+filledPrice+"', '"+priceType+"')");
+		        				}
+		        				else
 									stmt1.executeUpdate("insert into Orders VALUES"
-											+ "('"+accNum+"', '"+orderID+"', '"+orderType+"', '"+numShares+"', '"+dateTrans+"', "
-													+ "'"+fee+"', '"+priceType+"', '"+price+"', '"+percent+"', '"+stockSymbol
-													+"', '"+booleanFilled+"', '"+employeeNumber+"')");
+											+ "('"+accNum+"', '"+orderId+"', '"+orderType+"', '"+numShares+"', NOW(), "
+													+ "'"+fee+"', '"+stockSymbol+"', NULL, NULL, "
+															+ "'"+filledPrice+"', '"+priceType+"')");
 					} catch(Exception e)
 					{
 						e.printStackTrace();
@@ -65,7 +91,7 @@ public class CreateOrderServlet extends HttpServlet{
 					}
 		 
 		  
-		  RequestDispatcher view = request.getRequestDispatcher("FacultyInformation.jsp");
+		  RequestDispatcher view = request.getRequestDispatcher("employeeOrder.jsp");
 	      view.forward(request, response);    
 	    }
 }
