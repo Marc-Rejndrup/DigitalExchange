@@ -18,6 +18,20 @@
 			</c:forEach>
 		</table></div>
 		-->
-		
+		<form action="createOrder" method="post">
+			            Account Number: <input type=text name="accNum"/><br />
+                    	Order Type: <input id="Radio1" name="orderType" value='buy' checked="checked" type="radio" />Buy<input id="Radio2" name="orderType" value='sell' type="radio" />Sell<br />
+                    	Stock: <input type=text name="stockSymbol" /><br/>
+                    	NumShares: <input type=text name="numShares" /><br/>
+                    	Fee: <input type=text name="fee" /> <br />
+                    	Price Type: <input name="priceType" value='M' checked="checked" type="radio" />Market
+                    	<input name="priceType" value='C' type="radio" />Market on Close
+                    	<input name="priceType" value='T' type="radio" />Trailing Stop
+                    	<input name="priceType" value='H' type="radio" />Hidden Stop<br />
+                    	Price: <input type=text name="price" /><br/>
+                    	Percentage: <input type=text name="percent" /><br/>
+                    	Filled Price: <input type=text name="filledPrice" /><br/>
+                    	<input id="Button4" type="submit" />
+		</form>
 	</body>
 </html>

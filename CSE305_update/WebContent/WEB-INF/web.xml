@@ -65,12 +65,12 @@
 		<url-pattern>/getorder</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>createorder</servlet-name>
+		<servlet-name>createOrder</servlet-name>
 		<servlet-class>CreateOrderServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>createorder</servlet-name>
-		<url-pattern>/createorder</url-pattern>
+		<servlet-name>createOrder</servlet-name>
+		<url-pattern>/createOrder</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>managerEmployee</servlet-name>
