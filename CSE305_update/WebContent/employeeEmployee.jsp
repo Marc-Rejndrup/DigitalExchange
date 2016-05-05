@@ -5,7 +5,8 @@
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	</head>
 	<body>
-		<table>
+		<h1>Employees:</h1>
+		<div class="center"><table>
 			<tr>
 				<th>Name</th>
 				<th>SSN</th>
@@ -28,6 +29,6 @@
 					<td>${item.zipCode}</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table></div>
 	</body>
 </html>

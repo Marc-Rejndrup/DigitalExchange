@@ -1,11 +1,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Orders</title>
 <%@include file="managerHeader.jsp"%>
 </head>
 	<body>
-	
+	<h1>Orders</h1>
 		<div>
 			<form action="managerOrder" method="get">
                     	<div>Stock Symbol: <input type=text name="stockSymbol" /></div>
@@ -15,7 +15,7 @@
 			</form>
 		</div>
 		
-		<div>
+		<div class = "center">
 			<table>
 				<tr>
 					<th>ID</th>

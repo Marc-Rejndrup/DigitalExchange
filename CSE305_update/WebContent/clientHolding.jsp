@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<h1>Your holdings:</h1>
-		<table>
+		<div class="center"><table>
 			<tr>
 				<th>Symbol</th>
 				<th>Amount</th>
@@ -17,6 +17,6 @@
 				<td>${item.amount}</td>
 				<td><!--go to history button --></td>
 			</c:forEach>
-		</table>
+		</table></div>
 	</body>
 </html>

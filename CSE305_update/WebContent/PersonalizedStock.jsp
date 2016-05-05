@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 Order Table
+<div classs= "center">
 <table>
 <tr>
 	<td>Symbol</td>
@@ -20,6 +21,7 @@ Order Table
 </tr>
 </c:forEach>
 </table>
+</div>
 <form name="myForm" action="FacultyInformation.jsp" method="post">
 <input id="Button2" type="submit" value="Back" />
 

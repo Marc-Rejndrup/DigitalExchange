@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Stocks</title>
 <%@include file="managerHeader.jsp"%>
 </head>
 <body>
 	<div id='testDiv'></div>
-	<div id='stockDiv'>
+	<div id='stockDiv' class="center">
 		<table>
 			<tr>
 				<th>Symbol</th>
@@ -26,7 +26,7 @@
 			</c:forEach>
 		</table>
 	</div>
-	<div id='countDiv' class='hidden-div'>
+	<div id='countDiv' class='hidden-div center'>
 		<table>
 			<tr>
 				<th>Symbol</th>

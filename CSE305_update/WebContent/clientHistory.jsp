@@ -12,7 +12,7 @@
 		<c:if test="${Order} != null">
 			<h1>Order History</h1>
 			Order information:
-			<table>
+			<div class="center"><table>
 				<tr>
 					<th>Type</th>
 					<th>Number of Shares</th>
@@ -41,9 +41,9 @@
 					</c:if>
 					<td>${order.price}</td>
 				</tr>
-			</table>
+			</table></div>
 		</c:if>
-		<table>
+		<div class="center"><table>
 			<tr>
 				<th>Date</th>
 				<th>Price</th>
@@ -54,6 +54,6 @@
 					<td>${item.price}</td>
 				<tr>
 			</c:forEach>
-		</table>
+		</table></div>
 	</body>
 </html>

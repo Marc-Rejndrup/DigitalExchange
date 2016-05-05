@@ -1,3 +1,17 @@
+body{
+	background-color: rgb(15,20,25);
+	color: rgb(240, 245, 250);
+}
+head{
+	background-color: rgb(220,225,230);
+	color: rgb(20,25,30);
+}
+.NavLinks a{
+	font-size: 1.5em;
+}
+.center{
+	align : center;
+}
 table, th, td {
 	border: 1px solid black;
 }

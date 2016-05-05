@@ -5,8 +5,8 @@
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	</head>
 	<body>
-		<h1>Your Orders.</h1>
-		<table>
+		<h1>Your Orders:</h1>
+		<div class="center"><table>
 			<tr>
 				<th>ID</th>
 				<th>Stock</th>
@@ -29,6 +29,6 @@
 					<td>${empty item.price ? "Not completed." : item.price}</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table></div>
 	</body>
 </html>

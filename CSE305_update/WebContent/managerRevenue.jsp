@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Revenue</title>
 <%@include file="managerHeader.jsp"%>
 </head>
 <body>
@@ -22,7 +22,7 @@
 	</table>
 </div>
 
-<div id="symbolDiv" class="hidden-div">
+<div id="symbolDiv" class="hidden-div center">
 	<table>
 		<tr>
 			<th>Stock Symbol</th>
@@ -38,7 +38,7 @@
 	</table>
 </div>
 
-<div id="typeDiv" class="hidden-div">
+<div id="typeDiv" class="hidden-div center">
 	<table>
 		<tr>
 			<th>Stock Type</th>

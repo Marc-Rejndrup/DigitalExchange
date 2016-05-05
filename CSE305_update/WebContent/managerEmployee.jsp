@@ -5,7 +5,8 @@
 		<%@include file="managerHeader.jsp"%>
 	</head>
 	<body>
-		<table>
+		<h1>Employees</h1>
+		<div class ="center"><table>
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
@@ -34,7 +35,7 @@
 				</tr>
 			</form>
 			</c:forEach>
-		</table>
+		</table></div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 	</body>
 		

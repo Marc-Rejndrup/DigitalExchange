@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Manage Customer</title>
+		<title>Manage Clients</title>
 		<%@include file="managerHeader.jsp"%>
 	</head>
 	<body>
-		<table>
+		<h1>Client</h1>
+		<div class ="center"><table>
 			<tr>
 				<th>Name</th>
 				<th>ID</th>
@@ -30,7 +31,7 @@
 				<td>${item.telephone}</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table></div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 	</body>
 		
