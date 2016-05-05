@@ -12,9 +12,11 @@
 				<!--<th>Account</th>-->
 			</tr>
 			<c:forEach var="item" items="${RevenueCNTable}" >
+			<tr>
 				<td>${item.stockSymbol}</td>
 				<td>${item.price}</td>
 				<!--<td>${item.accountId}</td>-->
+			</tr>
 			</c:forEach>
 		</table>
 	</body>

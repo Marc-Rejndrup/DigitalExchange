@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<%@include file="clientHeader.jsp"%>
 		<title>Client Orders</title>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	</head>
@@ -17,7 +18,7 @@
 				<th>Trailing</th>
 				<th>Completed At</th>
 			</tr>
-			<c:forEach var="item" items="${HoldingTable}" >
+			<c:forEach var="item" items="${sessionScope.ClientOrderTable}" >
 				<tr>
 					<td>${item.accountId }
 					<td>${item.stock}</td>
@@ -30,5 +31,14 @@
 				</tr>
 			</c:forEach>
 		</table></div>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
+		<script>
+		$.ajax({
+			type: "POST",
+			url: "clientOrder",
+			context: document.body
+		});
+		
+	</script>
 	</body>
 </html>

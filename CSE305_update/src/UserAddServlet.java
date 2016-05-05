@@ -91,6 +91,8 @@ public class UserAddServlet extends HttpServlet {
 								
 				int accnum = Integer.parseInt(rs.getString(1)) + 1;
 				
+				accnum=ssn;
+				
 				stmt1.executeUpdate("insert into Account values('"+accnum+"', '"+ssn+"', NULL, DATE_FORMAT(NOW(),'%Y-%m-%d'))");
 				
 				stmt1.close();
@@ -108,6 +110,8 @@ public class UserAddServlet extends HttpServlet {
 				rs.next();
 								
 				int accnum = Integer.parseInt(rs.getString(1)) + 1;
+				
+				accnum=ssn;
 				
 				stmt1.executeUpdate("insert into Account values('"+accnum+"', NULL, '"+ssn+"', DATE_FORMAT(NOW(),'%Y-%m-%d'))");
 

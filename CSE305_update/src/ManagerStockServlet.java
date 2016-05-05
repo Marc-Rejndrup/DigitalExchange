@@ -13,7 +13,8 @@ import dataType.DataTypeHolding;
 import dataType.DataTypeStock;
 import dataType.DataTypeStockCount;
 
-public class ManagerStockServlet extends HttpServlet {//might need to handle doGet.
+public class ManagerStockServlet extends HttpServlet {
+	// to change stock price
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 		String loginID = ""+session.getAttribute("login");
@@ -55,6 +56,7 @@ public class ManagerStockServlet extends HttpServlet {//might need to handle doG
 		view.forward(request, response);    
 	}
 	
+	// to get stock info
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		String loginID = ""+session.getAttribute("login");

@@ -9,3 +9,8 @@ input {
 div {
 	padding: 15px;
 }
+
+body{
+	background-color: rgb(15,20,25);
+	color: rgb(240, 245, 250);
+}

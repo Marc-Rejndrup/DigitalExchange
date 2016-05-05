@@ -19,11 +19,13 @@ public class ClientHoldingServlet extends HttpServlet{
 		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
 		String mysUserID = "root"; 
 		String mysPassword = "1234";
+		System.out.println("REACHED");
 		//end always
 		//get Parameters
 		//String ssn = request.getParameter("empssn");
 		java.sql.Connection conn = null;
 		try {
+			System.out.println("your account ID: " + accountID);
 			Class.forName(mysJDBCDriver).newInstance();
 			java.util.Properties sysprops=System.getProperties();
 			sysprops.put("user",mysUserID);
@@ -32,7 +34,7 @@ public class ClientHoldingServlet extends HttpServlet{
 			System.out.println("Connected successfully to database using JConnect");
 
 			java.sql.Statement stmt1=conn.createStatement();
-			java.sql.ResultSet rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccountId = "+accountID);
+			java.sql.ResultSet rs = stmt1.executeQuery("SELECT * FROM HOLDING WHERE AccNum = " + loginID);
 			List<DataTypeHolding> list = new ArrayList<DataTypeHolding>();
 			while(rs.next()){
 				DataTypeHolding data = new DataTypeHolding();
@@ -41,7 +43,7 @@ public class ClientHoldingServlet extends HttpServlet{
 				data.setAmount(rs.getString(3));
 				list.add(data);
 			}
-			request.setAttribute("HoldingTable", list);
+			request.getSession().setAttribute("HoldingTable", list);
 			rs.close();
 			conn.close();
 		} catch(Exception e){
