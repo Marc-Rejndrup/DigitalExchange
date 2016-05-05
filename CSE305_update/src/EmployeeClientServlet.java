@@ -77,10 +77,11 @@ public class EmployeeClientServlet extends HttpServlet {//might need to handle d
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			rs = stmt1.executeQuery("SELECT * FROM client as c, person as p where c.ssn=p.ssn");
-			rs.next();
-			String ssn = rs.getString(5);
-
+			//rs = stmt1.executeQuery("SELECT * FROM client as c, person as p where c.ssn=p.ssn");
+			//rs.next();
+			
+			String ssn = request.getParameter("edit");
+			
 			String name = request.getParameter("name" + ssn);
 			String email = request.getParameter("email" + ssn);
 			String creditCard = request.getParameter("creditCard" + ssn);
@@ -89,11 +90,14 @@ public class EmployeeClientServlet extends HttpServlet {//might need to handle d
 			String zipCode = request.getParameter("zipCode" + ssn);
 			String telephone = request.getParameter("telephone" + ssn);
 			
-			stmt1.executeUpdate("update client set email='"+email+"', CreditCard='"+creditCard+"', rating='"+rating+"' where ssn='"+ssn+"'");
+			if(rating==null)
+				stmt1.executeUpdate("update client set email='"+email+"', CreditCard='"+creditCard+"', rating=1 where ssn='"+ssn+"'");
+			else
+				stmt1.executeUpdate("update client set email='"+email+"', CreditCard='"+creditCard+"', rating='"+rating+"' where ssn='"+ssn+"'");
 			stmt1.executeUpdate("update person set name='"+name+"', address='"+address+"', zipcode='"+zipCode+"', telephone='"+telephone+"' where ssn='"+ssn+"'");
 
 
-			rs.close();
+			//rs.close();
 			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();

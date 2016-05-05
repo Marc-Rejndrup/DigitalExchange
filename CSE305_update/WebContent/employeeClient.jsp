@@ -34,7 +34,7 @@
 					<td><input name='zipCode${item.ssn}' value='${item.zipCode}' /></td>
 					<td><input name='telephone${item.ssn}'
 						value='${item.telephone}' /></td>
-					<td><input type='submit' name='delete' value='${item.ssn}' /></td>
+					<td><input type='submit' name='edit' value='${item.ssn}' /></td>
 					</form>
 				</tr>
 			</c:forEach>
