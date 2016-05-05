@@ -7,14 +7,16 @@
 	</head>
 	<body>
 		<h1>Stocks</h1>
+
+		
+		<div class="center" id='stockDiv'>
 		<div>
-			<form action="clientStock" method="post">
+			<form action="clientStock" method="get">
                     	<div>Stock Symbol: <input type=text name="stockSymbol" /></div>
                     	<input type="submit" />
 			</form>
 		</div>
-		
-		<div class="center"><table>
+		<table>
 			<tr>
 				<th>Symbol</th>
 				<th>Price</th>
@@ -28,13 +30,45 @@
 			</tr>
 			</c:forEach>
 		</table></div>
+		
+	<div id='countDiv' class='hidden-div'>
+		<table>
+			<tr>
+				<th>Symbol</th>
+				<th>Times Sold</th>
+			</tr>
+			<c:forEach var="item" items="${sessionScope.ClientStockBestTable}">
+				<tr>
+					<td>${item.stock}</td>
+					<td>${item.count}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	
+	<button id="buttonStock">Stock History Lookup</button>
+	<button id="buttonCount">Best-Seller Stocks</button>
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
 		<script>
-		/*$.ajax({
+		$.ajax({
 			type: "POST",
 			url: "clientStock",
 			context: document.body
-		});*/
+		});
+		
+		var buttonStock = document.getElementById('buttonStock');
+		var buttonCount = document.getElementById('buttonCount');
+
+		buttonStock.onclick = function() {
+			document.getElementById('stockDiv').style.display = 'block';
+			document.getElementById('countDiv').style.display = 'none';
+		}
+
+		buttonCount.onclick = function() {
+			document.getElementById('stockDiv').style.display = 'none';
+			document.getElementById('countDiv').style.display = 'block';
+		}
 		
 	</script>
 	</body>

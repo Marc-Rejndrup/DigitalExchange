@@ -11,13 +11,11 @@
 			<tr>
 				<th>Symbol</th>
 				<th>Amount</th>
-				<th>History</th>
 			</tr>
 			<c:forEach var="item" items="${sessionScope.HoldingTable}" >
 			<tr>
 				<td>${item.symbol}</td>
 				<td>${item.amount}</td>
-				<td><!--go to history button --></td>
 			</tr>
 			</c:forEach>
 		</table></div>

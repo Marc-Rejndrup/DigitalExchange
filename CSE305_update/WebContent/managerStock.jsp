@@ -73,6 +73,5 @@
 		document.getElementById('countDiv').style.display = 'block';
 	}
 	
-	document.getElementById('testDiv').write("This works!");
 </script>
 </html>

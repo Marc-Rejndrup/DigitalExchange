@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dataType.DataTypeHolding;
 import dataType.DataTypeStock;
+import dataType.DataTypeStockCount;
 
 /*
  * This servlet will get all recent stock information with post
  */
 
 public class ClientStockServlet extends HttpServlet {//might need to handle doGet.
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 	 	String loginID = ""+session.getAttribute("login");
 		String accountID = ""+session.getAttribute("account");
@@ -58,4 +59,51 @@ public class ClientStockServlet extends HttpServlet {//might need to handle doGe
 		RequestDispatcher view = request.getRequestDispatcher("clientStock.jsp");
 		view.forward(request, response);    
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 	HttpSession session=request.getSession();
+	 	String loginID = ""+session.getAttribute("login");
+		String accountID = ""+session.getAttribute("account");
+		String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
+		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
+		String mysUserID = "root"; 
+		String mysPassword = "1234";
+		//get Parameters
+		//String x = request.getParameter("x");
+		java.sql.Connection conn = null;
+		try {
+			Class.forName(mysJDBCDriver).newInstance();
+			java.util.Properties sysprops=System.getProperties();
+			sysprops.put("user",mysUserID);
+			sysprops.put("password",mysPassword);
+			conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
+			System.out.println("Connected successfully to database using JConnect");
+			java.sql.ResultSet rs;
+			java.sql.Statement stmt1=conn.createStatement();
+			
+			rs = stmt1.executeQuery("select O.Symbol, count(O.Symbol) as num "
+					+ "from orders O "
+					+ "where O.FilledPrice IS NOT NULL and O.orderType='sell'"
+					+ "group by O.Symbol "
+					+ "order by num desc;");
+			List<DataTypeStockCount> list = new ArrayList<DataTypeStockCount>();
+			while(rs.next()){
+				DataTypeStockCount data = new DataTypeStockCount();
+				data.setStock(rs.getString(1));
+				data.setCount(rs.getString(2));
+				list.add(data);
+			}
+			request.getSession().setAttribute("ClientStockBestTable", list);
+			
+			rs.close();
+			conn.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally{
+			try{conn.close();}catch(Exception ee){};
+		}
+		RequestDispatcher view = request.getRequestDispatcher("clientStock.jsp");
+		view.forward(request, response);    
+	}
+	
 }
