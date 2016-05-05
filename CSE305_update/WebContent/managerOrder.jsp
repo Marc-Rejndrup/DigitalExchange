@@ -10,6 +10,7 @@
 			<form action="managerOrder" method="get">
                     	<div>Stock Symbol: <input type=text name="stockSymbol" /></div>
                     	<div>Customer Number: <input type=text name="custNum" /></div>
+                    	<div>Month: <input type=text name="month" /> Year: <input type=text name="year" /></div>
                     	<input type="submit" />
 			</form>
 		</div>

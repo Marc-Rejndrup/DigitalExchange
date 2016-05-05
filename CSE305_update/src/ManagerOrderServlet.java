@@ -24,6 +24,8 @@ public class ManagerOrderServlet extends HttpServlet {//might need to handle doG
 
 		String getSym = request.getParameter("stockSymbol");
 		String custNum = request.getParameter("custNum");
+		String month = request.getParameter("month");
+		String year = request.getParameter("year");
 		
 		java.sql.Connection conn = null;
 		try {
@@ -36,13 +38,17 @@ public class ManagerOrderServlet extends HttpServlet {//might need to handle doG
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
 			
-			if(getSym.equals("")){
+			if(!getSym.equals("")){
+				rs = stmt1.executeQuery("SELECT * FROM Orders WHERE Symbol='"+getSym+"'");
+				System.out.println("You entered this stock: " + getSym);
+			}
+			else if(!custNum.equals("")){
 				rs = stmt1.executeQuery("SELECT * FROM Orders as O, Account as A "
 						+ "where A.AccNum=O.AccNum and A.CustNum='"+custNum+"'");
 			}
 			else{
-				rs = stmt1.executeQuery("SELECT * FROM Orders WHERE Symbol='"+getSym+"'");
-				System.out.println("You entered this stock: " + getSym);
+				rs = stmt1.executeQuery("select * from orders where month(Date)='"+month+"' and year(Date)='"+year+"'");
+				System.out.println(month);
 			}
 			
 			
