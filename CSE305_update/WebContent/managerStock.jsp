@@ -30,6 +30,7 @@
 			</c:forEach>
 		</table>
 	</div>
+	
 	<div id='countDiv' class='hidden-div center'>
 		<table>
 			<tr>
@@ -44,6 +45,7 @@
 			</c:forEach>
 		</table>
 	</div>
+	
 
 	<button id="buttonStock">Current Stock Prices</button>
 	<button id="buttonCount">Most Actively Traded Stock</button>
@@ -72,6 +74,8 @@
 		document.getElementById('stockDiv').style.display = 'none';
 		document.getElementById('countDiv').style.display = 'block';
 	}
+	
+
 	
 </script>
 </html>
