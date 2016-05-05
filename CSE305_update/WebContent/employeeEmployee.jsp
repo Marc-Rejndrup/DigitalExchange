@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 		<%@include file="employeeHeader.jsp"%>
 		<title>View Employees</title>

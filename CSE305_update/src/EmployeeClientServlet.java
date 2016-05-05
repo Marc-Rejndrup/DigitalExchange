@@ -30,22 +30,22 @@ public class EmployeeClientServlet extends HttpServlet {//might need to handle d
 			System.out.println("Connected successfully to database using JConnect");
 			java.sql.ResultSet rs;
 			java.sql.Statement stmt1=conn.createStatement();
-			rs = stmt1.executeQuery("SELECT * FROM client");//WRONG
+			rs = stmt1.executeQuery("SELECT * FROM client as c, person as p where c.ssn=p.ssn");
 			List<DataTypeClient> list = new ArrayList<DataTypeClient>();
 			while(rs.next()){
 				DataTypeClient data = new DataTypeClient();
-				//what fields will this have?
-				/*
-				data.setFullName(rs.getString(1));
-				data.setTelephone(rs.getString(2));
-				data.setEmail(rs.getString(3));
-				data.setCustNum(rs.getString(4));
-				data.setCreditCard(rs.getString(5));
-				data.setRating(rs.getString(6));
-				*/
+				data.setEmail(rs.getString(1));
+				data.setCustNum(rs.getString(2));
+				data.setCreditCard(rs.getString(3));
+				data.setRating(rs.getString(4));
+				data.setSsn(rs.getString(5));
+				data.setName(rs.getString(6));
+				data.setAddress(rs.getString(7));
+				data.setZipCode(rs.getString(8));
+				data.setTelephone(rs.getString(9));
 				list.add(data);
 			}
-			request.setAttribute("EmployeeClientTable", list);
+			request.getSession().setAttribute("EmployeeClientTable", list);
 			rs.close();
 			conn.close();
 		}catch(Exception e){
