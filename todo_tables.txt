@@ -10,10 +10,14 @@ customer (with delete)
 
 Wei:
 	employee tables							?
-	order (add)								Updated. To be checked.
-	customer (edit, maillist_checklist)		
-	employee (-hourly rate)					Done, to be checked
+	order (add)								Done. Checking.
+	customer (edit, maillist,checklist)		
+		Customer Edit - Only 1 difference from hw2: Are we sure that there a client address?
+		Mail List - Updated.
+		Checklist - ?
 
+	employee (-hourly rate)					Done. Checking.
+	
 Client
 Stock ()
 Holding

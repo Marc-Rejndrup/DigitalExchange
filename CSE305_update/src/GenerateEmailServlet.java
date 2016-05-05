@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import dataType.DataTypeClient;
 
 public class GenerateEmailServlet extends HttpServlet{
 
@@ -36,13 +37,21 @@ public class GenerateEmailServlet extends HttpServlet{
             			
             			java.sql.ResultSet rs;
             			
-            			rs = stmt1.executeQuery("select Email from Client");
+            			rs = stmt1.executeQuery(
+            					  "SELECT Name, Telephone, Email "
+            					+ "FROM Client");
 
 
-            			List<String> list = new ArrayList<String>();
+            			List<DataTypeClient> list = new ArrayList<DataTypeClient>();
             			
             			while(rs.next()){
-            				list.add(rs.getString(1));
+            				DataTypeClient client = new DataTypeClient();
+            				client.setName(rs.getString(1));
+            				client.setTelephone(rs.getString(2));
+            				client.setEmail(rs.getString(3));
+            				
+            				list.add(client);
+            				
             			}
             			
             			request.setAttribute("emaillist", list);
