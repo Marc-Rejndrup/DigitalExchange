@@ -14,7 +14,7 @@ import dataType.DataTypeStock;
 import dataType.DataTypeStockCount;
 
 public class ManagerStockServlet extends HttpServlet {//might need to handle doGet.
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 	HttpSession session=request.getSession();
 		String loginID = ""+session.getAttribute("login");
 		String accountID = ""+session.getAttribute("account");
@@ -22,7 +22,47 @@ public class ManagerStockServlet extends HttpServlet {//might need to handle doG
 		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
 		String mysUserID = "root"; 
 		String mysPassword = "1234";
-		//get Parameters
+		
+		String symbol = request.getParameter("edit");
+		String newPrice = request.getParameter("price" + symbol);
+		
+		java.sql.Connection conn = null;
+		try {
+			Class.forName(mysJDBCDriver).newInstance();
+			java.util.Properties sysprops=System.getProperties();
+			sysprops.put("user",mysUserID);
+			sysprops.put("password",mysPassword);
+			conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
+			System.out.println("Connected successfully to database using JConnect");
+			
+			java.sql.Statement stmt1=conn.createStatement();
+			java.sql.ResultSet rs;
+			rs = stmt1.executeQuery("select * from Stock where symbol='"+symbol+"'");
+			rs.next();
+			String name = rs.getString(2);
+			String type = rs.getString(3);
+			System.out.println(newPrice);
+
+			stmt1.executeUpdate("insert into stock values ('"+symbol+"', '"+name+"', '"+type+"', NOW(), '"+newPrice+"')");
+			
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{conn.close();}catch(Exception ee){};
+		}
+		RequestDispatcher view = request.getRequestDispatcher("managerStock.jsp");
+		view.forward(request, response);    
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session=request.getSession();
+		String loginID = ""+session.getAttribute("login");
+		String accountID = ""+session.getAttribute("account");
+		String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
+		String mysURL ="jdbc:mysql://127.0.0.1:3306/cse305";
+		String mysUserID = "root"; 
+		String mysPassword = "1234";
 		//String x = request.getParameter("y");
 		java.sql.Connection conn = null;
 		try {

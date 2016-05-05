@@ -1,36 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 <title>Registration for Client</title>
-
-<script language="javascript" type="text/javascript">
-	function Button1_onclick() {
-		if (document.myForm.id.value == "")
-			alert("Your ID must not be null!!!")
-		else if (document.myForm.name.value == "")
-			alert("Your Name must not be null!!!")
-		else if (document.myForm.Password1.value == "")
-			alert("Your Password must not be null!!!")
-		else if (document.myForm.Password1.value != document.myForm.Password2.value)
-			alert("The Two Passwords Should Be the SAME!!!")
-
-		else {
-			document.myForm.submit()
-		}
-	}
-
-	function Button2_onclick() {
-		window.open("RegisterPage.htm", "_self");
-
-	}
-</script>
+<link rel="stylesheet" type="text/css" href="css/register.css">
 
 </head>
 
 <body>
 
-	Client Registration
+	<div><h2>Client Registration</h2></div>
 
 	<form name="myForm" action="useradd" method="post">
 
@@ -69,12 +45,32 @@
 			</div>
 
 			<input type="submit" value="Finish!"/>
+			<input id="Button3" type="button" value="Cancel"
+			onclick="window.open('index.htm','_self');" />
 	</form>
 
-	<form>
 
-		<input id="Button3" type="button" value="Cancel"
-			onclick="window.open('','_self');" /><br />
-	</form>
+	
+<script>
+	function Button1_onclick() {
+		if (document.myForm.id.value == "")
+			alert("Your ID must not be null!!!")
+		else if (document.myForm.name.value == "")
+			alert("Your Name must not be null!!!")
+		else if (document.myForm.Password1.value == "")
+			alert("Your Password must not be null!!!")
+		else if (document.myForm.Password1.value != document.myForm.Password2.value)
+			alert("The Two Passwords Should Be the SAME!!!")
+
+		else {
+			document.myForm.submit()
+		}
+	}
+
+	function Button2_onclick() {
+		window.open("RegisterPage.htm", "_self");
+	}
+</script>
+
 </body>
 </html>

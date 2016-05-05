@@ -57,8 +57,6 @@ FOREIGN KEY (AccNum) REFERENCES Account (AccNum),
 FOREIGN KEY (Symbol) REFERENCES Stock(Symbol)
 );
 
-
-
 CREATE TABLE Orders (
 AccNum		INTEGER(9) NOT NULL, 
 OrderId		INTEGER(9),

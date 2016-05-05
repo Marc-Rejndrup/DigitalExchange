@@ -14,15 +14,19 @@
 				<th>Type</th>
 				<th>Price</th>
 				<th>Last Updated</th>
+				<th>Edit</th>
 			</tr>
 			<c:forEach var="item" items="${sessionScope.ManagerStockTable}">
-				<tr>
-					<td>${item.symbol}</td>
-					<td>${item.name}</td>
-					<td>${item.type}</td>
-					<td>${item.price}</td>
-					<td>${item.date}</td>
-				</tr>
+				<form action="managerStock" method="get">
+					<tr>
+						<td>${item.symbol}</td>
+						<td>${item.name}</td>
+						<td>${item.type}</td>
+						<td><input name='price${item.symbol}' value='${item.price}' /></td>
+						<td>${item.date}</td>
+						<td><input type='submit' name='edit' value='${item.symbol}' /></td>
+					</tr>
+				</form>
 			</c:forEach>
 		</table>
 	</div>

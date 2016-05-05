@@ -19,3 +19,16 @@ table, th, td {
 .hidden-div{
 	display: none;
 }
+
+input{
+	background-color: gainsboro;
+}
+
+div{
+	padding: 3px;
+}
+
+td, th {
+	padding-left: 2px;
+	padding-right: 2px;	
+}

@@ -43,6 +43,7 @@ public class ManagerClientServlet extends HttpServlet {//might need to handle do
 				data.setCustNum(rs.getString(2));
 				data.setCreditCard(rs.getString(3));
 				data.setRating(rs.getString(4));
+				data.setSsn(rs.getString(5));
 				data.setName(rs.getString(6));
 				data.setAddress(rs.getString(7));
 				data.setZipCode(rs.getString(8));
