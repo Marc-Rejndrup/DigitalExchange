@@ -43,8 +43,8 @@ public class ManagerOrderServlet extends HttpServlet {//might need to handle doG
 				System.out.println("You entered this stock: " + getSym);
 			}
 			else if(!custNum.equals("")){
-				rs = stmt1.executeQuery("SELECT * FROM Orders as O, Account as A "
-						+ "where A.AccNum=O.AccNum and A.CustNum='"+custNum+"'");
+				rs = stmt1.executeQuery("SELECT * FROM Orders as O "
+						+ "where O.AccNum='"+custNum+"'");
 			}
 			else{
 				rs = stmt1.executeQuery("select * from orders where month(Date)='"+month+"' and year(Date)='"+year+"'");

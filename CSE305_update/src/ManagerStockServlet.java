@@ -62,7 +62,7 @@ public class ManagerStockServlet extends HttpServlet {
 				double sp = Double.parseDouble(rs.getString(8));
 				String orderId = rs.getString(2);
 				System.out.println(orderId);
-				if(sp > np){
+				if(sp >= np){
 					listId.add(orderId);
 				}
 			}
@@ -70,6 +70,8 @@ public class ManagerStockServlet extends HttpServlet {
 			for(String id : listId){
 				stmt1.executeUpdate("update orders set FilledPrice=Price where OrderId="+id);
 			}
+			
+			
 			
 			conn.close();
 		}catch(Exception e){
